@@ -26,6 +26,7 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -33,22 +34,25 @@ public class Vista extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        grado = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        turno = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        zona = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        clave_escuela1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        grupo = new javax.swing.JTextField();
-        municipio = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTable1 = new javax.swing.JTable();
+        aceptar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,61 +63,45 @@ public class Vista extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sello__2_-removebg-preview.png"))); // NOI18N
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 70));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Formato unico de alumnos");
         jLabel2.setToolTipText("gftyfytf");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Educacion preescolar");
         jLabel3.setToolTipText("");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nombre de la escuela");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
+        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Clave:");
         bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
-        grado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gradoActionPerformed(evt);
-            }
-        });
-        bg.add(grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, -1));
-
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Turno:");
         bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
-        bg.add(turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 240, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Zona:");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, -1, -1));
-        bg.add(zona, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 240, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Grado:");
         bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 60, -1));
-
-        clave_escuela1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clave_escuela1ActionPerformed(evt);
-            }
-        });
-        bg.add(clave_escuela1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -124,17 +112,12 @@ public class Vista extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Municipio:");
         bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, -1, -1));
-        bg.add(grupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 240, -1));
-
-        municipio.setForeground(new java.awt.Color(0, 0, 0));
-        bg.add(municipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 270, 240, -1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Nombre del director:");
         jLabel11.setToolTipText("");
         bg.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 230, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,15 +130,65 @@ public class Vista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7 ", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14"
             }
         ));
-        bg.add(jTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 860, 200));
+        bg.add(jTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 860, 400));
 
-        jButton1.setText("Aceptar");
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, -1));
+        aceptar.setText("Aceptar");
+        bg.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, -1, -1));
+
+        jButton1.setText("Eliminar");
+        jButton1.setPreferredSize(new java.awt.Dimension(80, 32));
+        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 880, -1, -1));
+
+        jButton2.setText("Agregar");
+        jButton2.setPreferredSize(new java.awt.Dimension(80, 32));
+        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 880, -1, -1));
+
+        jButton3.setText("Editar");
+        jButton3.setPreferredSize(new java.awt.Dimension(80, 32));
+        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 880, -1, -1));
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 460, 10));
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 240, 20));
+
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 240, 20));
+
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 20));
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 240, 20));
+
+        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 240, 20));
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 240, 20));
+
+        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, 20));
 
         imgBg.setForeground(new java.awt.Color(0, 0, 0));
-        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo uni.png"))); // NOI18N
-        bg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo uni (1).png"))); // NOI18N
+        imgBg.setMaximumSize(new java.awt.Dimension(1950, 1050));
+        imgBg.setMinimumSize(new java.awt.Dimension(1950, 1050));
+        imgBg.setPreferredSize(new java.awt.Dimension(1950, 1000));
+        bg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 1010, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,14 +203,6 @@ public class Vista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void gradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gradoActionPerformed
-
-    private void clave_escuela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clave_escuela1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clave_escuela1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,16 +240,24 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton aceptar;
     private javax.swing.JPanel bg;
-    private javax.swing.JTextField clave_escuela1;
-    private javax.swing.JTextField grado;
-    private javax.swing.JTextField grupo;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imgBg;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -233,11 +266,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField municipio;
-    private javax.swing.JTextField turno;
-    private javax.swing.JTextField zona;
     // End of variables declaration//GEN-END:variables
 }
