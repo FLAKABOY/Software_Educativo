@@ -32,7 +32,7 @@ public class Vista extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        nameSchool = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -42,17 +42,17 @@ public class Vista extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jTable1 = new javax.swing.JTable();
         aceptar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lbTurno = new javax.swing.JLabel();
+        lbZona = new javax.swing.JLabel();
+        lbGrado = new javax.swing.JLabel();
+        lbGrupo = new javax.swing.JLabel();
+        lbMunicipio = new javax.swing.JLabel();
+        lbNombreDirector = new javax.swing.JLabel();
+        lbClave = new javax.swing.JLabel();
         imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,8 +80,8 @@ public class Vista extends javax.swing.JFrame {
         jLabel4.setText("Nombre de la escuela");
         bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
+        nameSchool.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(nameSchool, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -132,63 +132,75 @@ public class Vista extends javax.swing.JFrame {
         ));
         bg.add(jTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 860, 400));
 
+        aceptar.setBackground(new java.awt.Color(255, 255, 255));
+        aceptar.setForeground(new java.awt.Color(0, 255, 0));
+        aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/comprobado.png"))); // NOI18N
         aceptar.setText("Aceptar");
-        bg.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, -1, -1));
+        bg.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, -1, 40));
 
-        jButton1.setText("Eliminar");
-        jButton1.setPreferredSize(new java.awt.Dimension(80, 32));
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 880, -1, -1));
+        eliminar.setBackground(new java.awt.Color(255, 255, 255));
+        eliminar.setForeground(new java.awt.Color(255, 0, 51));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png"))); // NOI18N
+        eliminar.setText("Eliminar");
+        eliminar.setPreferredSize(new java.awt.Dimension(80, 32));
+        bg.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 870, 100, -1));
 
-        jButton2.setText("Agregar");
-        jButton2.setPreferredSize(new java.awt.Dimension(80, 32));
-        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 880, -1, -1));
+        agregar.setBackground(new java.awt.Color(255, 255, 255));
+        agregar.setForeground(new java.awt.Color(51, 204, 0));
+        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar(1).png"))); // NOI18N
+        agregar.setText("Agregar");
+        agregar.setPreferredSize(new java.awt.Dimension(80, 32));
+        bg.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 870, 100, -1));
 
-        jButton3.setText("Editar");
-        jButton3.setPreferredSize(new java.awt.Dimension(80, 32));
-        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 880, -1, -1));
+        editar.setBackground(new java.awt.Color(255, 255, 255));
+        editar.setForeground(new java.awt.Color(20, 237, 190));
+        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
+        editar.setText("Editar");
+        editar.setPreferredSize(new java.awt.Dimension(80, 32));
+        bg.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 870, 100, -1));
         bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 460, 10));
 
-        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 240, 20));
+        lbTurno.setBackground(new java.awt.Color(255, 255, 255));
+        lbTurno.setForeground(new java.awt.Color(255, 255, 255));
+        lbTurno.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(lbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 240, 20));
 
-        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 240, 20));
+        lbZona.setBackground(new java.awt.Color(255, 255, 255));
+        lbZona.setForeground(new java.awt.Color(255, 255, 255));
+        lbZona.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(lbZona, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 240, 20));
 
-        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 20));
+        lbGrado.setBackground(new java.awt.Color(255, 255, 255));
+        lbGrado.setForeground(new java.awt.Color(255, 255, 255));
+        lbGrado.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(lbGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 20));
 
-        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 240, 20));
+        lbGrupo.setBackground(new java.awt.Color(255, 255, 255));
+        lbGrupo.setForeground(new java.awt.Color(255, 255, 255));
+        lbGrupo.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(lbGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 240, 20));
 
-        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 240, 20));
+        lbMunicipio.setBackground(new java.awt.Color(255, 255, 255));
+        lbMunicipio.setForeground(new java.awt.Color(255, 255, 255));
+        lbMunicipio.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(lbMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 240, 20));
 
-        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 240, 20));
+        lbNombreDirector.setBackground(new java.awt.Color(255, 255, 255));
+        lbNombreDirector.setForeground(new java.awt.Color(255, 255, 255));
+        lbNombreDirector.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(lbNombreDirector, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 240, 20));
 
-        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, 20));
+        lbClave.setBackground(new java.awt.Color(255, 255, 255));
+        lbClave.setForeground(new java.awt.Color(255, 255, 255));
+        lbClave.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.add(lbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, 20));
 
         imgBg.setForeground(new java.awt.Color(0, 0, 0));
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo uni (1).png"))); // NOI18N
         imgBg.setMaximumSize(new java.awt.Dimension(1950, 1050));
         imgBg.setMinimumSize(new java.awt.Dimension(1950, 1050));
         imgBg.setPreferredSize(new java.awt.Dimension(1950, 1000));
-        bg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 1010, -1));
+        bg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 1010, 1000));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,7 +235,6 @@ public class Vista extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
@@ -240,24 +251,16 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aceptar;
+    public javax.swing.JButton aceptar;
+    public javax.swing.JButton agregar;
     private javax.swing.JPanel bg;
     private javax.swing.ButtonGroup buttonGroup1;
+    public javax.swing.JButton editar;
+    public javax.swing.JButton eliminar;
     private javax.swing.JLabel imgBg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -267,6 +270,14 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
+    public javax.swing.JLabel lbClave;
+    public javax.swing.JLabel lbGrado;
+    public javax.swing.JLabel lbGrupo;
+    public javax.swing.JLabel lbMunicipio;
+    public javax.swing.JLabel lbNombreDirector;
+    public javax.swing.JLabel lbTurno;
+    public javax.swing.JLabel lbZona;
+    public javax.swing.JComboBox<String> nameSchool;
     // End of variables declaration//GEN-END:variables
 }
