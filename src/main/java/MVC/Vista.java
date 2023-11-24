@@ -4,6 +4,11 @@
  */
 package MVC;
 
+import Panel.Fua;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import javax.swing.JPanel;
+
 /**
  *
  * @author FLAKABOY
@@ -15,6 +20,27 @@ public class Vista extends javax.swing.JFrame {
      */
     public Vista() {
         initComponents();
+        InitContent();
+    }
+    
+    private void InitContent() {
+        vista(new Fua());
+    }
+    
+     private JPanel vista(JPanel p) {
+        /*
+        Se tiene el problema que no se logra adaptar el JPanel importado al
+        JPanel de la vista principal lo cual deja al programa con mala estetica
+        al no poder lograr hacerlo responsivo. (Maestra ayudeme)
+         */
+        p.setSize(bg.getWidth(), bg.getHeight());
+        p.setLocation(0, 0);
+
+        bg.removeAll();
+        bg.add(p, BorderLayout.CENTER);
+        bg.revalidate();
+        bg.repaint();
+        return bg;
     }
 
     /**
@@ -28,189 +54,32 @@ public class Vista extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         bg = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        nameSchool = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jTable1 = new javax.swing.JTable();
-        aceptar = new javax.swing.JButton();
-        eliminar = new javax.swing.JButton();
-        agregar = new javax.swing.JButton();
-        editar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        lbTurno = new javax.swing.JLabel();
-        lbZona = new javax.swing.JLabel();
-        lbGrado = new javax.swing.JLabel();
-        lbGrupo = new javax.swing.JLabel();
-        lbMunicipio = new javax.swing.JLabel();
-        lbNombreDirector = new javax.swing.JLabel();
-        lbClave = new javax.swing.JLabel();
-        imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        bg.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sello__2_-removebg-preview.png"))); // NOI18N
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 70));
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Formato unico de alumnos");
-        jLabel2.setToolTipText("gftyfytf");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Educacion preescolar");
-        jLabel3.setToolTipText("");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Nombre de la escuela");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
-
-        nameSchool.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(nameSchool, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Clave:");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Turno:");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Zona:");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Grado:");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 60, -1));
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Grupo:");
-        bg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("Municipio:");
-        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Nombre del director:");
-        jLabel11.setToolTipText("");
-        bg.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7 ", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14"
-            }
-        ));
-        bg.add(jTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 860, 400));
-
-        aceptar.setBackground(new java.awt.Color(255, 255, 255));
-        aceptar.setForeground(new java.awt.Color(0, 255, 0));
-        aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/comprobado.png"))); // NOI18N
-        aceptar.setText("Aceptar");
-        bg.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, -1, 40));
-
-        eliminar.setBackground(new java.awt.Color(255, 255, 255));
-        eliminar.setForeground(new java.awt.Color(255, 0, 51));
-        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png"))); // NOI18N
-        eliminar.setText("Eliminar");
-        eliminar.setPreferredSize(new java.awt.Dimension(80, 32));
-        bg.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 870, 100, -1));
-
-        agregar.setBackground(new java.awt.Color(255, 255, 255));
-        agregar.setForeground(new java.awt.Color(51, 204, 0));
-        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar(1).png"))); // NOI18N
-        agregar.setText("Agregar");
-        agregar.setPreferredSize(new java.awt.Dimension(80, 32));
-        bg.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 870, 100, -1));
-
-        editar.setBackground(new java.awt.Color(255, 255, 255));
-        editar.setForeground(new java.awt.Color(20, 237, 190));
-        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
-        editar.setText("Editar");
-        editar.setPreferredSize(new java.awt.Dimension(80, 32));
-        bg.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 870, 100, -1));
-        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 460, 10));
-
-        lbTurno.setBackground(new java.awt.Color(255, 255, 255));
-        lbTurno.setForeground(new java.awt.Color(255, 255, 255));
-        lbTurno.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(lbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 240, 20));
-
-        lbZona.setBackground(new java.awt.Color(255, 255, 255));
-        lbZona.setForeground(new java.awt.Color(255, 255, 255));
-        lbZona.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(lbZona, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 240, 20));
-
-        lbGrado.setBackground(new java.awt.Color(255, 255, 255));
-        lbGrado.setForeground(new java.awt.Color(255, 255, 255));
-        lbGrado.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(lbGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 20));
-
-        lbGrupo.setBackground(new java.awt.Color(255, 255, 255));
-        lbGrupo.setForeground(new java.awt.Color(255, 255, 255));
-        lbGrupo.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(lbGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 240, 20));
-
-        lbMunicipio.setBackground(new java.awt.Color(255, 255, 255));
-        lbMunicipio.setForeground(new java.awt.Color(255, 255, 255));
-        lbMunicipio.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(lbMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 240, 20));
-
-        lbNombreDirector.setBackground(new java.awt.Color(255, 255, 255));
-        lbNombreDirector.setForeground(new java.awt.Color(255, 255, 255));
-        lbNombreDirector.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(lbNombreDirector, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 240, 20));
-
-        lbClave.setBackground(new java.awt.Color(255, 255, 255));
-        lbClave.setForeground(new java.awt.Color(255, 255, 255));
-        lbClave.setBorder(new javax.swing.border.MatteBorder(null));
-        bg.add(lbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, 20));
-
-        imgBg.setForeground(new java.awt.Color(0, 0, 0));
-        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo uni (1).png"))); // NOI18N
-        imgBg.setMaximumSize(new java.awt.Dimension(1950, 1050));
-        imgBg.setMinimumSize(new java.awt.Dimension(1950, 1050));
-        imgBg.setPreferredSize(new java.awt.Dimension(1950, 1000));
-        bg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 1010, 1000));
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1002, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
         );
 
         pack();
@@ -251,33 +120,7 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton aceptar;
-    public javax.swing.JButton agregar;
-    private javax.swing.JPanel bg;
+    public javax.swing.JPanel bg;
     private javax.swing.ButtonGroup buttonGroup1;
-    public javax.swing.JButton editar;
-    public javax.swing.JButton eliminar;
-    private javax.swing.JLabel imgBg;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
-    public javax.swing.JTable jTable1;
-    public javax.swing.JLabel lbClave;
-    public javax.swing.JLabel lbGrado;
-    public javax.swing.JLabel lbGrupo;
-    public javax.swing.JLabel lbMunicipio;
-    public javax.swing.JLabel lbNombreDirector;
-    public javax.swing.JLabel lbTurno;
-    public javax.swing.JLabel lbZona;
-    public javax.swing.JComboBox<String> nameSchool;
     // End of variables declaration//GEN-END:variables
 }
