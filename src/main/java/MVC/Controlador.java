@@ -35,7 +35,7 @@ public class Controlador implements ActionListener, KeyListener {
         JPanel de la vista principal lo cual deja al programa con mala estetica
         al no poder lograr hacerlo responsivo. (Maestra ayudeme)
          */
-        p.setSize(790, 460);
+        p.setSize(vista.bg.getWidth(), vista.bg.getHeight());
         p.setLocation(0, 0);
 
         vista.bg.removeAll();

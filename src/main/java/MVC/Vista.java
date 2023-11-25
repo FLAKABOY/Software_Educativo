@@ -6,7 +6,6 @@ package MVC;
 
 import Panel.Fua;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +20,7 @@ public class Vista extends javax.swing.JFrame {
     public Vista() {
         initComponents();
         InitContent();
+        this.setLocationRelativeTo(null);
     }
     
     private void InitContent() {

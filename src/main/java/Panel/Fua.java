@@ -4,9 +4,6 @@
  */
 package Panel;
 
-import static java.awt.PageAttributes.MediaType.C;
-import javax.swing.ImageIcon;
-
 
 /**
  *
@@ -72,27 +69,27 @@ public class Fua extends javax.swing.JPanel {
 
         btn_aceptar.setBackground(new java.awt.Color(255, 255, 255));
         btn_aceptar.setForeground(new java.awt.Color(0, 255, 0));
-        btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/comprobado.png"))); // NOI18N
+        btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
         btn_aceptar.setText("Aceptar");
         add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, -1, 40));
 
         btn_eliminar.setBackground(new java.awt.Color(255, 255, 255));
         btn_eliminar.setForeground(new java.awt.Color(255, 0, 51));
-        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png"))); // NOI18N
+        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/borrar.png"))); // NOI18N
         btn_eliminar.setText("Eliminar");
         btn_eliminar.setPreferredSize(new java.awt.Dimension(80, 32));
         add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 920, 100, -1));
 
         btn_agregar.setBackground(new java.awt.Color(255, 255, 255));
         btn_agregar.setForeground(new java.awt.Color(51, 204, 0));
-        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar(1).png"))); // NOI18N
+        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar(1).png"))); // NOI18N
         btn_agregar.setText("Agregar");
         btn_agregar.setPreferredSize(new java.awt.Dimension(80, 32));
         add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 920, 100, -1));
 
         btn_editar.setBackground(new java.awt.Color(255, 255, 255));
         btn_editar.setForeground(new java.awt.Color(20, 237, 190));
-        btn_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
+        btn_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
         btn_editar.setText("Editar");
         btn_editar.setPreferredSize(new java.awt.Dimension(80, 32));
         add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 920, 100, -1));
@@ -110,7 +107,7 @@ public class Fua extends javax.swing.JPanel {
         ));
         add(jTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 860, 400));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sello__2_-removebg-preview.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sello__2_-removebg-preview.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 70));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -204,9 +201,9 @@ public class Fua extends javax.swing.JPanel {
         jLabel12.setToolTipText("");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo uni (1).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 1000));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 990));
     }// </editor-fold>//GEN-END:initComponents
 
 
