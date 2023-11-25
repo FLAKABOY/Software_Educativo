@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -21,20 +22,33 @@ public class Controlador implements ActionListener, KeyListener {
     //Atributos
     private Modelo modelo;
     private Vista vista;
+    //Panel principal
+    private Fua fua;
+    //Panel de agregar
+    private Agregar agregar;
 
     public Controlador(Vista vista, Modelo modelo) {
         vista.setVisible(true);
         this.modelo = modelo;
         this.vista = vista;
+        
+        //Instanciar el panel principal
+        this.fua = new Fua();
+        //Asignar un listener para cada boton del panel principal
+        this.fua.btn_aceptar.addActionListener(this);
+        this.fua.btn_agregar.addActionListener(this);
+        this.fua.btn_eliminar.addActionListener(this);
+        this.fua.btn_editar.addActionListener(this);
+        vista.bg = vista(fua);
+        
+        //Instanmciar el panel de agregar
+        this.agregar = new Agregar();
+        //Asignar un listener al boton
+        this.agregar.btn_aceptar.addActionListener(this);
+        this.agregar.btn_atras.addActionListener(this);
     }
 
     private JPanel vista(JPanel p) {
-        //780,472
-        /*
-        Se tiene el problema que no se logra adaptar el JPanel importado al
-        JPanel de la vista principal lo cual deja al programa con mala estetica
-        al no poder lograr hacerlo responsivo. (Maestra ayudeme)
-         */
         p.setSize(vista.bg.getWidth(), vista.bg.getHeight());
         p.setLocation(0, 0);
 
@@ -45,10 +59,74 @@ public class Controlador implements ActionListener, KeyListener {
         return vista.bg;
     }
 
+    
+    //Metodo para los botones de las vistas y colocar los paneles
+    /**
+     *
+     * @param evento
+     */
     @Override
-///Metodo para los botones de las vistas y colocar los paneles
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actionPerformed(ActionEvent evento) {
+        System.out.println("ENTRANDO...");
+        //Se programa el panel principal
+        //Boton de aceptar para confirmar la busqueda
+        if(fua.btn_aceptar == evento.getSource()){
+            //Programar las acciones del controlador para mostrar en la tabla
+            try{
+                
+            } catch (RuntimeException e){
+                //Mensaje de advertencia en caso de error
+                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        else if(fua.btn_agregar == evento.getSource()){
+            //Programar la muestra del panel de agregar para un alumno
+            try{
+                vista.bg = vista(agregar);
+                
+            } catch (RuntimeException e){
+                //Mensaje de advertencia en caso de error
+                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        else if(fua.btn_editar == evento.getSource()){
+            //Programar la muestra del panel de editar los datos
+            try{
+                
+            } catch (RuntimeException e){
+                //Mensaje de advertencia en caso de error
+                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        else if(fua.btn_eliminar == evento.getSource()){
+            //Programar la logica para eliminar logicamente un alumno 
+            try{
+                
+            } catch (RuntimeException e){
+                //Mensaje de advertencia en caso de error
+                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        
+        //Se programa los botones de agregar
+        if(agregar.btn_aceptar == evento.getSource()){
+            //Programar la logica para agregar un alumno
+            try{
+                
+            } catch (RuntimeException e){
+                //Mensaje de advertencia en caso de error
+                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        else if(agregar.btn_atras == evento.getSource()){
+            //Programar la muestra del panel principal
+            try{
+                vista.bg = vista(fua);
+            } catch (RuntimeException e){
+                //Mensaje de advertencia en caso de error
+                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Panel visual para agregar un nuevo alumno
+ * 
  */
 package Panel;
 
@@ -50,8 +50,8 @@ public class Agregar extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         lengua = new javax.swing.JTextField();
         entidad_nacimiento = new javax.swing.JTextField();
-        aceptar = new javax.swing.JButton();
-        atras = new javax.swing.JButton();
+        btn_aceptar = new javax.swing.JButton();
+        btn_atras = new javax.swing.JButton();
         fechaNacimiento = new com.toedter.calendar.JDateChooser();
         fechaAlta = new com.toedter.calendar.JDateChooser();
         fechaBaja = new com.toedter.calendar.JDateChooser();
@@ -71,7 +71,7 @@ public class Agregar extends javax.swing.JPanel {
         jLabel2.setText("Agregar Alumno ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sello__2_-removebg-preview.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sello__2_-removebg-preview.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, -1, 80));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -145,16 +145,16 @@ public class Agregar extends javax.swing.JPanel {
         jPanel1.add(lengua, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 510, 560, -1));
         jPanel1.add(entidad_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 560, -1));
 
-        aceptar.setBackground(new java.awt.Color(255, 255, 255));
-        aceptar.setForeground(new java.awt.Color(0, 255, 0));
-        aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/comprobado.png"))); // NOI18N
-        aceptar.setText("Aceptar");
-        jPanel1.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 930, 100, 40));
+        btn_aceptar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_aceptar.setForeground(new java.awt.Color(0, 255, 0));
+        btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
+        btn_aceptar.setText("Aceptar");
+        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 930, 100, 40));
 
-        atras.setBackground(new java.awt.Color(255, 255, 255));
-        atras.setForeground(new java.awt.Color(255, 255, 255));
-        atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/atras{.png"))); // NOI18N
-        jPanel1.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, -1));
+        btn_atras.setBackground(new java.awt.Color(255, 255, 255));
+        btn_atras.setForeground(new java.awt.Color(255, 255, 255));
+        btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras{.png"))); // NOI18N
+        jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, -1));
         jPanel1.add(fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 280, -1));
         jPanel1.add(fechaAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 700, 280, -1));
         jPanel1.add(fechaBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 760, 280, -1));
@@ -166,7 +166,7 @@ public class Agregar extends javax.swing.JPanel {
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 760, -1, -1));
 
         fondo.setBackground(new java.awt.Color(255, 255, 255));
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo uni (1).png"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N
         fondo.setMaximumSize(new java.awt.Dimension(1950, 1050));
         fondo.setMinimumSize(new java.awt.Dimension(1950, 1050));
         fondo.setPreferredSize(new java.awt.Dimension(1950, 1000));
@@ -186,8 +186,8 @@ public class Agregar extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton aceptar;
-    private javax.swing.JButton atras;
+    public javax.swing.JButton btn_aceptar;
+    public javax.swing.JButton btn_atras;
     public javax.swing.JTextField clave_alumno;
     public javax.swing.JTextField condicion;
     public javax.swing.JTextField curp;

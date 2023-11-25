@@ -1,12 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Frame que contiene el panel donde se mostraran los demas paneles
+ * 
  */
 package MVC;
 
-import Panel.Fua;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
 
 /**
  *
@@ -19,28 +16,7 @@ public class Vista extends javax.swing.JFrame {
      */
     public Vista() {
         initComponents();
-        InitContent();
         this.setLocationRelativeTo(null);
-    }
-    
-    private void InitContent() {
-        vista(new Fua());
-    }
-    
-     private JPanel vista(JPanel p) {
-        /*
-        Se tiene el problema que no se logra adaptar el JPanel importado al
-        JPanel de la vista principal lo cual deja al programa con mala estetica
-        al no poder lograr hacerlo responsivo. (Maestra ayudeme)
-         */
-        p.setSize(bg.getWidth(), bg.getHeight());
-        p.setLocation(0, 0);
-
-        bg.removeAll();
-        bg.add(p, BorderLayout.CENTER);
-        bg.revalidate();
-        bg.repaint();
-        return bg;
     }
 
     /**

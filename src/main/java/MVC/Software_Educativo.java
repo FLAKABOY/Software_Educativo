@@ -1,5 +1,5 @@
 /*
- * Esta clase se encarga de llamar a todo lo requerido
+ * Esta clase se encarga de llamar a todo lo requerido del software educativo
  * 
  */
 package MVC;

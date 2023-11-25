@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Panel principal del software educativo
+ * 
  */
 package Panel;
 
@@ -65,6 +65,7 @@ public class Fua extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(999, 987));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_aceptar.setBackground(new java.awt.Color(255, 255, 255));
@@ -203,7 +204,7 @@ public class Fua extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 1000));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 990));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 1000));
     }// </editor-fold>//GEN-END:initComponents
 
 
