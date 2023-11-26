@@ -25,9 +25,9 @@ public class Modelo {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Establecer la conexión
-            String url = "jdbc:mysql://url:puerto/nombreDB";
-            String user = "";
-            String password = "";
+            String url = "jdbc:mysql://btkrvdapppgy233vaq6o-mysql.services.clever-cloud.com:3306/btkrvdapppgy233vaq6o";
+            String user = "usnix0qg87aobery";
+            String password = "zQ7KRdZxjiOkeyYUm6GF";
             connection = DriverManager.getConnection(url, user, password);
             
             System.out.println("Conexión exitosa a la base de datos.");

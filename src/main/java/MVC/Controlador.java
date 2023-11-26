@@ -79,7 +79,7 @@ public class Controlador implements ActionListener, KeyListener {
         if (fua.btn_aceptar == evento.getSource()) {
             //Programar las acciones del controlador para mostrar en la tabla
             try {
-
+                Modelo.conectar();
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
