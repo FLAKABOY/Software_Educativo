@@ -55,14 +55,14 @@ public class Editar extends javax.swing.JPanel {
         fecha_baja = new com.toedter.calendar.JDateChooser();
         fecha_nacimiento = new com.toedter.calendar.JDateChooser();
         fecha_alta = new com.toedter.calendar.JDateChooser();
-        aceptar = new javax.swing.JButton();
-        atras = new javax.swing.JButton();
+        btn_aceptar = new javax.swing.JButton();
+        btn_atras = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1136, 1000));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sello__2_-removebg-preview.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sello__2_-removebg-preview.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, -1, 80));
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -150,16 +150,16 @@ public class Editar extends javax.swing.JPanel {
         jPanel1.add(fecha_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 260, -1));
         jPanel1.add(fecha_alta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 700, 260, -1));
 
-        aceptar.setBackground(new java.awt.Color(255, 255, 255));
-        aceptar.setForeground(new java.awt.Color(0, 255, 0));
-        aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/comprobado.png"))); // NOI18N
-        aceptar.setText("Aceptar");
-        jPanel1.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 930, 100, 40));
+        btn_aceptar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_aceptar.setForeground(new java.awt.Color(0, 255, 0));
+        btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
+        btn_aceptar.setText("Aceptar");
+        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 930, 120, 40));
 
-        atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/atras{.png"))); // NOI18N
-        jPanel1.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
+        btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras{.png"))); // NOI18N
+        jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
 
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo uni (1).png"))); // NOI18N
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N
         Fondo.setMaximumSize(new java.awt.Dimension(1950, 1050));
         Fondo.setMinimumSize(new java.awt.Dimension(1950, 1050));
         Fondo.setPreferredSize(new java.awt.Dimension(1000, 1000));
@@ -182,17 +182,17 @@ public class Editar extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
-    private javax.swing.JButton aceptar;
-    private javax.swing.JButton atras;
-    private javax.swing.JTextField clave_alumno;
-    private javax.swing.JTextField condicion;
-    private javax.swing.JTextField curp;
-    private javax.swing.JTextField entidad_nacimiento;
-    private javax.swing.JTextField estatus;
-    private com.toedter.calendar.JDateChooser fecha_alta;
-    private com.toedter.calendar.JDateChooser fecha_baja;
-    private com.toedter.calendar.JDateChooser fecha_nacimiento;
-    private javax.swing.JTextField folio_boleta;
+    public javax.swing.JButton btn_aceptar;
+    public javax.swing.JButton btn_atras;
+    public javax.swing.JTextField clave_alumno;
+    public javax.swing.JTextField condicion;
+    public javax.swing.JTextField curp;
+    public javax.swing.JTextField entidad_nacimiento;
+    public javax.swing.JTextField estatus;
+    public com.toedter.calendar.JDateChooser fecha_alta;
+    public com.toedter.calendar.JDateChooser fecha_baja;
+    public com.toedter.calendar.JDateChooser fecha_nacimiento;
+    public javax.swing.JTextField folio_boleta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -209,9 +209,9 @@ public class Editar extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField lengua_indigena;
-    private javax.swing.JTextField nombre_alumno;
-    private javax.swing.JTextField requisitos_faltantes;
-    private javax.swing.JComboBox<String> sexo;
+    public javax.swing.JTextField lengua_indigena;
+    public javax.swing.JTextField nombre_alumno;
+    public javax.swing.JTextField requisitos_faltantes;
+    public javax.swing.JComboBox<String> sexo;
     // End of variables declaration//GEN-END:variables
 }

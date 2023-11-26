@@ -149,7 +149,7 @@ public class Agregar extends javax.swing.JPanel {
         btn_aceptar.setForeground(new java.awt.Color(0, 255, 0));
         btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
         btn_aceptar.setText("Aceptar");
-        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 930, 100, 40));
+        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 930, 120, 40));
 
         btn_atras.setBackground(new java.awt.Color(255, 255, 255));
         btn_atras.setForeground(new java.awt.Color(255, 255, 255));

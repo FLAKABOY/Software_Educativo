@@ -16,7 +16,7 @@ public class Fua extends javax.swing.JPanel {
      */
     public Fua() {
         initComponents();
-        IniStyles();
+        //IniStyles();
     }
     
     private void IniStyles(){
@@ -79,14 +79,14 @@ public class Fua extends javax.swing.JPanel {
         btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/borrar.png"))); // NOI18N
         btn_eliminar.setText("Eliminar");
         btn_eliminar.setPreferredSize(new java.awt.Dimension(80, 32));
-        add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 920, 100, -1));
+        add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 920, 120, -1));
 
         btn_agregar.setBackground(new java.awt.Color(255, 255, 255));
         btn_agregar.setForeground(new java.awt.Color(51, 204, 0));
         btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar(1).png"))); // NOI18N
         btn_agregar.setText("Agregar");
         btn_agregar.setPreferredSize(new java.awt.Dimension(80, 32));
-        add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 920, 100, -1));
+        add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 920, 120, -1));
 
         btn_editar.setBackground(new java.awt.Color(255, 255, 255));
         btn_editar.setForeground(new java.awt.Color(20, 237, 190));
