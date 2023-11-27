@@ -1,6 +1,12 @@
 /*
- * Esta clase se encarga de todas las funcionalidades de botones y llamadas a las consultas de la BD
- * 
+ * Rendon Estrada Jorge
+ * Fecha: 25/11/2023
+ * Descripcion: clase controladora para Modelo,Vista,Controlador
+ * Se coloca la funcionalidad de los Botones en esta clase, asi como
+ * la llamada a los metodos de la BD, se instacian todos los paneles y se
+ * deben poner los atributos de los paneles (Botones,Cajas de texto,etc)
+ * con el modificador de accceso public para poder acceder a ellos desde
+ * esta clase
  */
 package MVC;
 
@@ -115,6 +121,14 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.btn_aceptar == evento.getSource()) {
             //Programar la logica para agregar un alumno
             try {
+                //Se llama al metodo para agregar
+                Modelo.altaAlumno(Integer.parseInt(agregar.clave_alumno.getText()), agregar.curp.getText(), agregar.nombre_alumno.getText()
+                        , agregar.sexo.getSelectedItem().toString(), agregar.fechaNacimiento.getDateFormatString(), agregar.entidad_nacimiento.getText(), 
+                        agregar.lengua.getText(), agregar.condicion.getText(), agregar.requisitos_faltantes.getText(),
+                        agregar.fechaAlta.getDateFormatString(), agregar.estatus.getText(),
+                        Integer.parseInt(agregar.folio_boleta.getText()), agregar.clave_Escuela.getSelectedItem().toString());
+                //Metodo para limpiar los campos
+                limpiarCampos();
 
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -164,5 +178,23 @@ public class Controlador implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    // Metodo para limpiar los campos la momento de cambiar entre paneles
+    public void limpiarCampos(){
+        agregar.clave_alumno.setText("");
+        agregar.curp.setText("");
+        agregar.nombre_alumno.setText("");
+        agregar.fechaNacimiento.setDate(null);
+        agregar.entidad_nacimiento.setText("");
+        agregar.lengua.setText("");
+        agregar.condicion.setText("");
+        agregar.requisitos_faltantes.setText("");
+        agregar.fechaAlta.setDate(null);
+        agregar.estatus.setText("");
+        agregar.folio_boleta.setText("");
+        
+        //Linea para editar
+       //agregar.fechaBaja.setDate(null);
     }
 }

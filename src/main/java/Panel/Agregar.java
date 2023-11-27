@@ -54,9 +54,9 @@ public class Agregar extends javax.swing.JPanel {
         btn_atras = new javax.swing.JButton();
         fechaNacimiento = new com.toedter.calendar.JDateChooser();
         fechaAlta = new com.toedter.calendar.JDateChooser();
-        fechaBaja = new com.toedter.calendar.JDateChooser();
         estatus = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        clave_Escuela = new javax.swing.JComboBox<>();
         fondo = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -77,93 +77,99 @@ public class Agregar extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Curp:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nombre del Alumno:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Sexo:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Fecha de nacimiento:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Entidad de nacimiento:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Lengua indigena:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 560, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Condicion:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 620, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Requisitos faltantes:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 680, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Folio de la boleta:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 880, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 850, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("Clave del alumno:");
+        jLabel13.setText("Clave de la escuela:");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
-        jPanel1.add(requisitos_faltantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 640, 560, -1));
-        jPanel1.add(condicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 560, -1));
-        jPanel1.add(nombre_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, 560, -1));
-        jPanel1.add(clave_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 560, -1));
-        jPanel1.add(curp, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 560, -1));
-        jPanel1.add(folio_boleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 880, 560, -1));
+        jPanel1.add(requisitos_faltantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 680, 560, -1));
+        jPanel1.add(condicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 620, 560, -1));
+        jPanel1.add(nombre_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 560, -1));
+        jPanel1.add(clave_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 560, -1));
+        jPanel1.add(curp, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 560, -1));
+        jPanel1.add(folio_boleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 850, 560, -1));
 
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, 160, -1));
+        jPanel1.add(sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 160, -1));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Fecha de alta:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 700, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 740, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Estatus:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 830, -1, -1));
-        jPanel1.add(lengua, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 510, 560, -1));
-        jPanel1.add(entidad_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 560, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 800, -1, -1));
+        jPanel1.add(lengua, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, 560, -1));
+        jPanel1.add(entidad_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 500, 560, -1));
 
         btn_aceptar.setBackground(new java.awt.Color(255, 255, 255));
         btn_aceptar.setForeground(new java.awt.Color(0, 255, 0));
         btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
         btn_aceptar.setText("Aceptar");
-        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 930, 120, 40));
+        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 940, 120, 40));
 
         btn_atras.setBackground(new java.awt.Color(255, 255, 255));
         btn_atras.setForeground(new java.awt.Color(255, 255, 255));
         btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras{.png"))); // NOI18N
         jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, -1));
-        jPanel1.add(fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 280, -1));
-        jPanel1.add(fechaAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 700, 280, -1));
-        jPanel1.add(fechaBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 760, 280, -1));
-        jPanel1.add(estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 820, 550, -1));
 
-        jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel16.setText("Fecha de baja:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 760, -1, -1));
+        fechaNacimiento.setDateFormatString("yyyy/MM/dd");
+        jPanel1.add(fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 280, -1));
+
+        fechaAlta.setDateFormatString("yyyy/MM/dd");
+        jPanel1.add(fechaAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 740, 280, -1));
+        jPanel1.add(estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 790, 550, -1));
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setText("Clave del alumno:");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+
+        clave_Escuela.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(clave_Escuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 380, -1));
 
         fondo.setBackground(new java.awt.Color(255, 255, 255));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N
@@ -188,23 +194,23 @@ public class Agregar extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_aceptar;
     public javax.swing.JButton btn_atras;
+    public javax.swing.JComboBox<String> clave_Escuela;
     public javax.swing.JTextField clave_alumno;
     public javax.swing.JTextField condicion;
     public javax.swing.JTextField curp;
     public javax.swing.JTextField entidad_nacimiento;
     public javax.swing.JTextField estatus;
     public com.toedter.calendar.JDateChooser fechaAlta;
-    public com.toedter.calendar.JDateChooser fechaBaja;
     public com.toedter.calendar.JDateChooser fechaNacimiento;
     public javax.swing.JTextField folio_boleta;
-    private javax.swing.JLabel fondo;
+    public javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
