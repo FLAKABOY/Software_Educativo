@@ -161,7 +161,7 @@ public class Agregar extends javax.swing.JPanel {
 
         fechaAlta.setDateFormatString("yyyy/MM/dd");
         jPanel1.add(fechaAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 740, 280, -1));
-        jPanel1.add(estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 790, 550, -1));
+        jPanel1.add(estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 800, 550, -1));
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 0, 0));
@@ -169,7 +169,7 @@ public class Agregar extends javax.swing.JPanel {
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
         clave_Escuela.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(clave_Escuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 380, -1));
+        jPanel1.add(clave_Escuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 140, -1));
 
         fondo.setBackground(new java.awt.Color(255, 255, 255));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N

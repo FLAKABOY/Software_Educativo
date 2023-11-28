@@ -35,7 +35,7 @@ public class Modelo {
 
             System.out.println("Conexión exitosa a la base de datos.");
         } catch (SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error en la conexión");
+            JOptionPane.showMessageDialog(null, "ERROR EN LA CONEXION", "ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             // Manejo de excepciones
         }
@@ -100,6 +100,26 @@ public class Modelo {
             while (resultado.next()) {
                 String escuela = resultado.getString("nombre_escuela");
                 cb.addItem(escuela);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    //Metodo para llenar el cb con clave de la escuela
+    public static void completeCbCalve(JComboBox cbE){
+        //Limpiar el CB
+        cbE.removeAllItems();
+
+        /*Se declaran los recursos que utilizara el metodo para que al terminar
+         el bloque try estos se cierren automaticamente (Pricipalmente la conexion)*/
+        String sql = "SELECT clave_escuela FROM Datos_escuela";
+        try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql);  ResultSet resultado = ps.executeQuery();) {
+
+            while (resultado.next()) {
+                String escuela = resultado.getString("clave_escuela");
+                cbE.addItem(escuela);
             }
 
         } catch (SQLException e) {
