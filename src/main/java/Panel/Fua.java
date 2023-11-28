@@ -123,14 +123,14 @@ public class Fua extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
         lbClave.setBackground(new java.awt.Color(255, 255, 255));
-        lbClave.setForeground(new java.awt.Color(255, 255, 255));
+        lbClave.setForeground(new java.awt.Color(0, 0, 0));
         lbClave.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, 20));
+        add(lbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 70, 20));
 
         lbGrado.setBackground(new java.awt.Color(255, 255, 255));
-        lbGrado.setForeground(new java.awt.Color(255, 255, 255));
+        lbGrado.setForeground(new java.awt.Color(0, 0, 0));
         lbGrado.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 20));
+        add(lbGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 30, 20));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -144,7 +144,7 @@ public class Fua extends javax.swing.JPanel {
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
 
         lbNombreDirector.setBackground(new java.awt.Color(255, 255, 255));
-        lbNombreDirector.setForeground(new java.awt.Color(255, 255, 255));
+        lbNombreDirector.setForeground(new java.awt.Color(0, 0, 0));
         lbNombreDirector.setBorder(new javax.swing.border.MatteBorder(null));
         add(lbNombreDirector, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 240, 20));
 
@@ -154,14 +154,14 @@ public class Fua extends javax.swing.JPanel {
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
 
         lbTurno.setBackground(new java.awt.Color(255, 255, 255));
-        lbTurno.setForeground(new java.awt.Color(255, 255, 255));
+        lbTurno.setForeground(new java.awt.Color(0, 0, 0));
         lbTurno.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 240, 20));
+        add(lbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 90, 20));
 
         lbGrupo.setBackground(new java.awt.Color(255, 255, 255));
-        lbGrupo.setForeground(new java.awt.Color(255, 255, 255));
+        lbGrupo.setForeground(new java.awt.Color(0, 0, 0));
         lbGrupo.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 240, 20));
+        add(lbGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 20, 20));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -174,9 +174,9 @@ public class Fua extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, -1, -1));
 
         lbZona.setBackground(new java.awt.Color(255, 255, 255));
-        lbZona.setForeground(new java.awt.Color(255, 255, 255));
+        lbZona.setForeground(new java.awt.Color(0, 0, 0));
         lbZona.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbZona, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 240, 20));
+        add(lbZona, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 40, 20));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,9 +184,9 @@ public class Fua extends javax.swing.JPanel {
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, -1, -1));
 
         lbMunicipio.setBackground(new java.awt.Color(255, 255, 255));
-        lbMunicipio.setForeground(new java.awt.Color(255, 255, 255));
+        lbMunicipio.setForeground(new java.awt.Color(0, 0, 0));
         lbMunicipio.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 240, 20));
+        add(lbMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 270, 90, 20));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));

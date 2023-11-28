@@ -43,6 +43,13 @@
             <artifactId>jxl</artifactId>
             <version>2.6.12</version> <!-- Utiliza la versión que necesites -->
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version> <!-- Verifica la última versión en https://search.maven.org/artifact/org.projectlombok/lombok -->
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

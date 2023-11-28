@@ -18,6 +18,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -48,6 +50,9 @@ public class Controlador implements ActionListener, KeyListener {
         this.fua.btn_eliminar.addActionListener(this);
         this.fua.btn_editar.addActionListener(this);
         vista.bg = vista(fua);
+        Modelo.completeCbFua(fua.cb_school);
+        //Se coloca el listener despues de llenar el CB para no generar NullPointerException
+        this.fua.cb_school.addActionListener(this);
 
         //Instanmciar el panel de agregar
         this.agregar = new Agregar();
@@ -113,6 +118,29 @@ public class Controlador implements ActionListener, KeyListener {
 
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
+                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        else if (fua.cb_school == evento.getSource()){
+            //Programar la logica para eliminar logicamente un alumno 
+            try {
+                System.out.println("Entro");
+                //Programar las acciones para llenar dependiendo de la opcion seleccionada
+                //Se manda a llamar el metodo para obtener los datos de la escual y guardarlos en un objeto
+                Escuela es = Modelo.completeData(fua.cb_school.getSelectedItem().toString());
+                System.out.println("creo");
+                //Se procede a llenar los campos con la informacion obtenida
+                fua.lbClave.setText(es.clave_escuela);
+                fua.lbTurno.setText(es.turno);
+                fua.lbZona.setText(String.valueOf(es.zona));
+                fua.lbGrado.setText(String.valueOf(es.grado));
+                fua.lbGrupo.setText(es.grupo);
+                fua.lbMunicipio.setText(es.municipio);
+                fua.lbNombreDirector.setText(es.nombre_director);
+                System.out.println("lleno");
+            } catch (RuntimeException e) {
+                //Mensaje de advertencia en caso de error
+                e.printStackTrace(); // Imprime la traza de la excepción en la consola
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -196,5 +224,99 @@ public class Controlador implements ActionListener, KeyListener {
         
         //Linea para editar
        //agregar.fechaBaja.setDate(null);
+    }
+    
+    
+    //Crear una subclase para poder completar los campos
+    @NoArgsConstructor  // Genera un constructor sin argumentos
+    @AllArgsConstructor //Genera constructor de parametros automaticamente
+    public static class Escuela{
+        //Atributos
+        private String clave_escuela;
+        private String nombre_escuela;
+        private String turno;
+        private int zona;
+        private int grado;
+        private String grupo;
+        private String municipio;
+        private String nombre_director;
+        private String ciclo_escolar;
+        
+        //Constructores generados automaticamente
+        
+        //Encapsulamiento
+
+        public String getClave_escuela() {
+            return clave_escuela;
+        }
+
+        public void setClave_escuela(String clave_escuela) {
+            this.clave_escuela = clave_escuela;
+        }
+
+        public String getNombre_escuela() {
+            return nombre_escuela;
+        }
+
+        public void setNombre_escuela(String nombre_escuela) {
+            this.nombre_escuela = nombre_escuela;
+        }
+
+        public String getTurno() {
+            return turno;
+        }
+
+        public void setTurno(String turno) {
+            this.turno = turno;
+        }
+
+        public int getZona() {
+            return zona;
+        }
+
+        public void setZona(int zona) {
+            this.zona = zona;
+        }
+
+        public int getGrado() {
+            return grado;
+        }
+
+        public void setGrado(int grado) {
+            this.grado = grado;
+        }
+
+        public String getGrupo() {
+            return grupo;
+        }
+
+        public void setGrupo(String grupo) {
+            this.grupo = grupo;
+        }
+
+        public String getMunicipio() {
+            return municipio;
+        }
+
+        public void setMunicipio(String municipio) {
+            this.municipio = municipio;
+        }
+
+        public String getNombre_director() {
+            return nombre_director;
+        }
+
+        public void setNombre_director(String nombre_director) {
+            this.nombre_director = nombre_director;
+        }
+
+        public String getCiclo_escolar() {
+            return ciclo_escolar;
+        }
+
+        public void setCiclo_escolar(String ciclo_escolar) {
+            this.ciclo_escolar = ciclo_escolar;
+        }
+        
     }
 }

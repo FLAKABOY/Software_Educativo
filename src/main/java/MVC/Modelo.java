@@ -6,11 +6,12 @@
  */
 package MVC;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,20 +19,20 @@ import javax.swing.JOptionPane;
  * @author FLAKABOY
  */
 public class Modelo {
-    
+
     //Metodo que realiza la conexion a la DB
-    public static Connection conectar(){
+    public static Connection conectar() {
         Connection connection = null;
-        try{
+        try {
             //Primer paso programar el controlador JDBC
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
+
             //Establecer la conexión
             String url = "jdbc:mysql://btkrvdapppgy233vaq6o-mysql.services.clever-cloud.com:3306/btkrvdapppgy233vaq6o";
             String user = "usnix0qg87aobery";
             String password = "zQ7KRdZxjiOkeyYUm6GF";
             connection = DriverManager.getConnection(url, user, password);
-            
+
             System.out.println("Conexión exitosa a la base de datos.");
         } catch (SQLException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error en la conexión");
@@ -40,20 +41,19 @@ public class Modelo {
         }
         return connection;
     }
-    
-    public static void altaAlumno(int claveAlumno, String curp, String nombre_alumnos, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena
-    , String condicion, String requisitos_faltantes, String fecha_alta, String estatus, int folio_boleta, String clave_escuela){
-        
+
+    public static void altaAlumno(int claveAlumno, String curp, String nombre_alumnos, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
+             String condicion, String requisitos_faltantes, String fecha_alta, String estatus, int folio_boleta, String clave_escuela) {
+
         //Se prepara la sentencia SQL
         String sql = "INSERT INTO Datos_alumnos (claveAlumno,curp,nombre_alumnos,sexo,fecha_nacimiento,entidad_nacimiento,lengua_indigena,condicion,requisitos_faltantes"
                 + ",fecha_alta,estatus,folio_boleta,clave_escuela) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        
+
         /*Se declaran los recursos que utilizara el metodo para que al terminar
          el bloque try estos se cierren automaticamente (Pricipalmente la conexion)*/
-        
-        try(Connection con = conectar(); //Se establece la conexion
-                PreparedStatement comando = con.prepareStatement(sql) ){
-            
+        try ( Connection con = conectar(); //Se establece la conexion
+                  PreparedStatement comando = con.prepareStatement(sql)) {
+
             // Establecer los valores de los parámetros en el PreparedStatement
             comando.setInt(1, claveAlumno);
             comando.setString(2, curp);
@@ -68,10 +68,10 @@ public class Modelo {
             comando.setString(11, estatus);
             comando.setInt(12, folio_boleta);
             comando.setString(13, clave_escuela);
-            
+
             // Ejecutar la consulta de inserción y obtener el número de filas afectadas
             int filasInsertadas = comando.executeUpdate();
-            
+
             // Verificar si se insertaron filas correctamente y mostrar un mensaje
             if (filasInsertadas > 0) {
                 JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
@@ -79,9 +79,66 @@ public class Modelo {
                 JOptionPane.showMessageDialog(null, "ERROR AL REGISTRAR EL USUARIO");
             }
             //La conexion se cierra automaticamente debido al try-with-resources.
-            
-        }catch(SQLException e){
-             JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    //Metodo para llenar el CB del panel principal para hacer la busqueda
+    public static void completeCbFua(JComboBox cb) {
+
+        //Limpiar el CB
+        cb.removeAllItems();
+
+        /*Se declaran los recursos que utilizara el metodo para que al terminar
+         el bloque try estos se cierren automaticamente (Pricipalmente la conexion)*/
+        String sql = "SELECT nombre_escuela FROM Datos_escuela";
+        try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql);  ResultSet resultado = ps.executeQuery();) {
+
+            cb.addItem("");
+            while (resultado.next()) {
+                String escuela = resultado.getString("nombre_escuela");
+                cb.addItem(escuela);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static Controlador.Escuela completeData(String name) {
+    String sql = "SELECT * FROM Datos_escuela WHERE nombre_escuela = ?";
+
+    try (Connection con = conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+        // Establecer el parámetro antes de ejecutar la consulta
+        ps.setString(1, name);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            // Verificar si se encontró alguna fila antes de intentar obtener datos
+            if (rs.next()) {
+                Controlador.Escuela escuela = new Controlador.Escuela(
+                        rs.getString("clave_escuela"),
+                        rs.getString("nombre_escuela"),
+                        rs.getString("turno"),
+                        rs.getInt("zona"),
+                        rs.getInt("grado"),
+                        rs.getString("grupo"),
+                        rs.getString("municipio"),
+                        rs.getString("nombre_director"),
+                        rs.getString("ciclo_escolar"));
+
+                // Retorna el objeto con los datos llenos
+                return escuela;
+            } else {
+                // Manejo de caso en el que no se encontraron resultados
+                System.out.println("No se encontraron datos para la escuela con nombre: " + name);
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+    return null;
+    }
 }
+
