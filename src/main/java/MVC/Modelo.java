@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -42,22 +43,24 @@ public class Modelo {
         return connection;
     }
 
-    public static void altaAlumno(int claveAlumno, String curp, String nombre_alumnos, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
-             String condicion, String requisitos_faltantes, String fecha_alta, String estatus, int folio_boleta, String clave_escuela) {
+    public static void altaAlumno(int claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
+             String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja,String estatus, int folio_boleta, String clave_escuela) {
 
         //Se prepara la sentencia SQL
-        String sql = "INSERT INTO Datos_alumnos (claveAlumno,curp,nombre_alumnos,sexo,fecha_nacimiento,entidad_nacimiento,lengua_indigena,condicion,requisitos_faltantes"
-                + ",fecha_alta,estatus,folio_boleta,clave_escuela) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Datos_alumnos (clave_alumnos,curp,nombre_alumno,sexo,fecha_nacimiento,entidad_nacimiento,lengua_indigena,condicion,requisitos_faltantes"
+                + ",fecha_alta,fecha_baja,estatus,folio_boleta,clave) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         /*Se declaran los recursos que utilizara el metodo para que al terminar
          el bloque try estos se cierren automaticamente (Pricipalmente la conexion)*/
         try ( Connection con = conectar(); //Se establece la conexion
                   PreparedStatement comando = con.prepareStatement(sql)) {
 
+            System.out.println("Fecha de nacimiento: " + fecha_nacimiento);
+            System.out.println("Fecha de alta: " + fecha_alta);
             // Establecer los valores de los parámetros en el PreparedStatement
             comando.setInt(1, claveAlumno);
             comando.setString(2, curp);
-            comando.setString(3, nombre_alumnos);
+            comando.setString(3, nombre_alumno);
             comando.setString(4, sexo);
             comando.setString(5, fecha_nacimiento);
             comando.setString(6, entidad_nacimiento);
@@ -65,9 +68,10 @@ public class Modelo {
             comando.setString(8, condicion);
             comando.setString(9, requisitos_faltantes);
             comando.setString(10, fecha_alta);
-            comando.setString(11, estatus);
-            comando.setInt(12, folio_boleta);
-            comando.setString(13, clave_escuela);
+            comando.setString(11, fecha_baja);
+            comando.setString(12, estatus);
+            comando.setInt(13, folio_boleta);
+            comando.setString(14, clave_escuela);
 
             // Ejecutar la consulta de inserción y obtener el número de filas afectadas
             int filasInsertadas = comando.executeUpdate();
@@ -81,8 +85,10 @@ public class Modelo {
             //La conexion se cierra automaticamente debido al try-with-resources.
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);    
         }
+        System.out.println("ALUMNO");
     }
 
     //Metodo para llenar el CB del panel principal para hacer la busqueda

@@ -49,7 +49,7 @@ public class Controlador implements ActionListener, KeyListener {
         //Instanciar el panel principal
         this.fua = new Fua();
         //Asignar un listener para cada boton del panel principal
-        this.fua.btn_aceptar.addActionListener(this);
+        this.fua.Editar_escuela.addActionListener(this);
         this.fua.btn_agregar.addActionListener(this);
         this.fua.btn_eliminar.addActionListener(this);
         this.fua.btn_editar.addActionListener(this);
@@ -102,7 +102,7 @@ public class Controlador implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent evento) {
         //Se programa el panel principal
         //Boton de aceptar para confirmar la busqueda
-        if (fua.btn_aceptar == evento.getSource()) {
+        if (fua.Editar_escuela == evento.getSource()) {
             //Programar las acciones del controlador para mostrar en la tabla
             try {
 
@@ -162,20 +162,80 @@ public class Controlador implements ActionListener, KeyListener {
 
         //Se programa los botones de agregar
         if (agregar.btn_aceptar == evento.getSource()) {
-            //Programar la logica para agregar un alumno
             try {
-                //Se llama al metodo para agregar
-                Modelo.altaAlumno(Integer.parseInt(agregar.clave_alumno.getText()), agregar.curp.getText(), agregar.nombre_alumno.getText(),
-                        agregar.sexo.getSelectedItem().toString(), agregar.fechaNacimiento.getDateFormatString(), agregar.entidad_nacimiento.getText(),
-                        agregar.lengua.getText(), agregar.condicion.getText(), agregar.requisitos_faltantes.getText(),
-                        agregar.fechaAlta.getDateFormatString(), agregar.estatus.getText(),
-                        Integer.parseInt(agregar.folio_boleta.getText()), agregar.clave_Escuela.getSelectedItem().toString());
-                //Metodo para limpiar los campos
-                limpiarCampos();
+                // Validar que los campos no estén vacíos
+                if (!agregar.clave_alumno.getText().isEmpty()
+                        && !agregar.curp.getText().isEmpty()
+                        && !agregar.nombre_alumno.getText().isEmpty()
+                        && !agregar.fechaNacimiento.getDateFormatString().isEmpty()
+                        && !agregar.entidad_nacimiento.getText().isEmpty()
+                        && !agregar.fechaAlta.getDateFormatString().isEmpty()) {
 
-            } catch (RuntimeException e) {
-                //Mensaje de advertencia en caso de error
-                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    //En caso de que los campos numericos esten vacios
+                    if (!agregar.folio_boleta.getText().isEmpty()) {
+                        // Obtener la fecha de nacimiento como cadena formateada
+                        String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaNacimiento.getDate());
+
+                        // Obtener la fecha de alta como cadena formateada
+                        String fechaAltaString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaAlta.getDate());
+                        
+                        // Llamar al método para agregar
+                        Modelo.altaAlumno(
+                                Integer.parseInt(agregar.clave_alumno.getText()),
+                                agregar.curp.getText(),
+                                agregar.nombre_alumno.getText(),
+                                agregar.sexo.getSelectedItem().toString(),
+                                fechaNacimientoString,
+                                agregar.entidad_nacimiento.getText(),
+                                agregar.lengua.getText(),
+                                agregar.condicion.getText(),
+                                agregar.requisitos_faltantes.getText(),
+                                fechaAltaString,
+                                "0000-00-00",
+                                agregar.estatus.getText(),
+                                Integer.parseInt(agregar.folio_boleta.getText()),
+                                agregar.clave_Escuela.getSelectedItem().toString()
+                        );
+                    } else {
+                        // Obtener la fecha de nacimiento como cadena formateada
+                        String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaNacimiento.getDate());
+
+                        // Obtener la fecha de alta como cadena formateada
+                        String fechaAltaString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaAlta.getDate());
+
+                        // Llamar al método para agregar
+                        Modelo.altaAlumno(
+                                Integer.parseInt(agregar.clave_alumno.getText()),
+                                agregar.curp.getText(),
+                                agregar.nombre_alumno.getText(),
+                                agregar.sexo.getSelectedItem().toString(),
+                                fechaNacimientoString,
+                                agregar.entidad_nacimiento.getText(),
+                                agregar.lengua.getText(),
+                                agregar.condicion.getText(),
+                                agregar.requisitos_faltantes.getText(),
+                                fechaAltaString,
+                                "0000-00-00",
+                                agregar.estatus.getText(),
+                                0,
+                                agregar.clave_Escuela.getSelectedItem().toString()
+                        );
+                    }
+
+                    // Método para limpiar los campos
+                    limpiarCampos();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Favor de llenar los campos necesarios", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+
+            } catch (NumberFormatException e) {
+                // Manejar la excepción específica de conversión de número
+                JOptionPane.showMessageDialog(null, "Error al convertir un valor numérico: " + e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } catch (Exception e) {
+                // Manejar otras excepciones generales
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error general: " + e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         } else if (agregar.btn_atras == evento.getSource()) {
             //Programar la muestra del panel principal
@@ -222,7 +282,7 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.condicion == evento.getSource()) {
             if (agregar.curp.getText().length() >= 18) {
                 evento.consume();
-            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
                 evento.consume();
             }
         }
@@ -230,7 +290,7 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.curp == evento.getSource()) {
             if (agregar.curp.getText().length() >= 18) {
                 evento.consume();
-            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') && (c != 'ñ') && (c != 'Ñ')) {
                 evento.consume();
             }
         }
@@ -238,7 +298,7 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.entidad_nacimiento == evento.getSource()) {
             if (agregar.entidad_nacimiento.getText().length() >= 45) {
                 evento.consume();
-            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
                 evento.consume();
             }
         }
@@ -246,7 +306,7 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.estatus == evento.getSource()) {
             if (agregar.estatus.getText().length() >= 30) {
                 evento.consume();
-            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
                 evento.consume();
             }
         }
@@ -260,7 +320,7 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.lengua == evento.getSource()) {
             if (agregar.lengua.getText().length() >= 30) {
                 evento.consume();
-            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
                 evento.consume();
             }
         }
@@ -268,7 +328,7 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.nombre_alumno == evento.getSource()) {
             if (agregar.nombre_alumno.getText().length() >= 45) {
                 evento.consume();
-            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
                 evento.consume();
             }
         }
@@ -276,11 +336,10 @@ public class Controlador implements ActionListener, KeyListener {
         if (agregar.requisitos_faltantes == evento.getSource()) {
             if (agregar.requisitos_faltantes.getText().length() >= 100) {
                 evento.consume();
-            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ') && (c != '.') && (c != ',')) {
                 evento.consume();
             }
         }
-      
 
     }
 
@@ -292,12 +351,40 @@ public class Controlador implements ActionListener, KeyListener {
     //Metodo para hacer que todas las letras sean mayusculas
     @Override
     public void keyReleased(KeyEvent evento) {
-        if(agregar.clave_alumno == evento.getSource()){
+        if (agregar.clave_alumno == evento.getSource()) {
             agregar.clave_alumno.setText(agregar.clave_alumno.getText().toUpperCase());
         }
-        
-        if(agregar.condicion == evento.getSource()){
+
+        if (agregar.condicion == evento.getSource()) {
             agregar.condicion.setText(agregar.condicion.getText().toUpperCase());
+        }
+
+        if (agregar.curp == evento.getSource()) {
+            agregar.curp.setText(agregar.curp.getText().toUpperCase());
+        }
+
+        if (agregar.entidad_nacimiento == evento.getSource()) {
+            agregar.entidad_nacimiento.setText(agregar.entidad_nacimiento.getText().toUpperCase());
+        }
+
+        if (agregar.estatus == evento.getSource()) {
+            agregar.estatus.setText(agregar.estatus.getText().toUpperCase());
+        }
+
+        if (agregar.folio_boleta == evento.getSource()) {
+            agregar.folio_boleta.setText(agregar.folio_boleta.getText().toUpperCase());
+        }
+
+        if (agregar.lengua == evento.getSource()) {
+            agregar.lengua.setText(agregar.lengua.getText().toUpperCase());
+        }
+
+        if (agregar.nombre_alumno == evento.getSource()) {
+            agregar.nombre_alumno.setText(agregar.nombre_alumno.getText().toUpperCase());
+        }
+
+        if (agregar.requisitos_faltantes == evento.getSource()) {
+            agregar.requisitos_faltantes.setText(agregar.requisitos_faltantes.getText().toUpperCase());
         }
 
     }
@@ -326,27 +413,35 @@ public class Controlador implements ActionListener, KeyListener {
     public static class Escuela {
 
         //Atributos
-        @Getter @Setter
+        @Getter
+        @Setter
         private String clave_escuela;
-        @Getter @Setter
+        @Getter
+        @Setter
         private String nombre_escuela;
-        @Getter @Setter
+        @Getter
+        @Setter
         private String turno;
-        @Getter @Setter
+        @Getter
+        @Setter
         private int zona;
-        @Getter @Setter
+        @Getter
+        @Setter
         private int grado;
-        @Getter @Setter
+        @Getter
+        @Setter
         private String grupo;
-        @Getter @Setter
+        @Getter
+        @Setter
         private String municipio;
-        @Getter @Setter
+        @Getter
+        @Setter
         private String nombre_director;
-        @Getter @Setter
+        @Getter
+        @Setter
         private String ciclo_escolar;
 
         //Constructores generados automaticamente con las anotaciones
-        
         //Encapsulamiento generado con las anotaciones
     }
 }
