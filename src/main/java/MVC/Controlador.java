@@ -17,7 +17,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -81,7 +84,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         this.editar.btn_aceptar.addActionListener(this);
         this.editar.btn_atras.addActionListener(this);
 
-        //Agregar un listener a los Jtext
+        //Agregar un listener a los Jtext de agregar
         this.agregar.clave_alumno.addKeyListener(this);
         this.agregar.condicion.addKeyListener(this);
         this.agregar.curp.addKeyListener(this);
@@ -91,6 +94,17 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         this.agregar.lengua.addKeyListener(this);
         this.agregar.nombre_alumno.addKeyListener(this);
         this.agregar.requisitos_faltantes.addKeyListener(this);
+
+        //Agregar un listener a los Jtext de editar alumno
+        this.editar.clave_alumno.addKeyListener(this);
+        this.editar.condicion.addKeyListener(this);
+        this.editar.curp.addKeyListener(this);
+        this.editar.entidad_nacimiento.addKeyListener(this);
+        this.editar.estatus.addKeyListener(this);
+        this.editar.folio_boleta.addKeyListener(this);
+        this.editar.lengua_indigena.addKeyListener(this);
+        this.editar.nombre_alumno.addKeyListener(this);
+        this.editar.requisitos_faltantes.addKeyListener(this);
     }
 
     private JPanel vista(JPanel p) {
@@ -134,10 +148,56 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (fua.btn_editar == evento.getSource()) {
             //Programar la muestra del panel de editar los datos
             try {
-                vista.bg = vista(editar);
+                //Comprobar que se selecciono algun alumno
+                if (alumnoSeleccionado != null) {
+                    // Obtener la fecha de nacimiento como cadena formateada
+                    String fechaNacimientoString = alumnoSeleccionado.fechNacimiento;
+                    SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                    // Convertir la cadena a un objeto Date
+                    java.util.Date fechaNac = formatoFecha.parse(fechaNacimientoString);
+
+                    // Obtener la fecha de alta como cadena formateada
+                    String fecAltaString = alumnoSeleccionado.fechAlta;
+                    SimpleDateFormat fechaA = new SimpleDateFormat("yyyy-MM-dd");
+                    java.util.Date fechaAlt = fechaA.parse(fecAltaString);
+
+                    String fecBajaString = alumnoSeleccionado.fechBaja;
+                    SimpleDateFormat fechaBajaString = new SimpleDateFormat("yyyy-MM-dd");
+                    java.util.Date fechaBaj = fechaBajaString.parse(fecBajaString);
+
+                    //Llenar los campos antes de mostrar
+                    editar.clave_alumno.setText(Integer.toString(alumnoSeleccionado.clave));
+                    editar.condicion.setText(alumnoSeleccionado.condicion);
+                    editar.curp.setText(alumnoSeleccionado.curp);
+                    editar.entidad_nacimiento.setText(alumnoSeleccionado.entNacimiento);
+                    editar.estatus.setText(alumnoSeleccionado.estatus);
+                    editar.fecha_alta.setDate(fechaAlt);
+                    editar.fecha_baja.setDate(fechaBaj);
+                    editar.fecha_nacimiento.setDate(fechaNac);
+                    editar.folio_boleta.setText(Integer.toString(alumnoSeleccionado.folioBoleta));
+                    editar.lengua_indigena.setText(alumnoSeleccionado.lengIndigena);
+                    editar.nombre_alumno.setText(alumnoSeleccionado.nombre);
+                    editar.requisitos_faltantes.setText(alumnoSeleccionado.reqFaltantes);
+
+                    //Poner el ComboBox dependiendo del sexo
+                    //Limpiar el CB
+                    editar.sexo.removeAllItems();
+                    //Comprobacion y llenado
+                    String sexo = alumnoSeleccionado.sexo;
+
+                    editar.sexo.addItem(sexo.equals("Femenino") ? "Femenino" : "Masculino");
+                    editar.sexo.addItem(sexo.equals("Masculino") ? "Femenino" : "Masculino");
+
+                    //Mostrar el panel de editar
+                    vista.bg = vista(editar);
+                } else {
+                    JOptionPane.showMessageDialog(null, "FAVOR DE SELECCIONAR UN ALUMNO DE LA TABLA");
+                }
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } catch (ParseException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (fua.btn_eliminar == evento.getSource()) {
             //Programar la logica para eliminar logicamente un alumno 
@@ -355,6 +415,74 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             }
         }
 
+        //Condiciones para el panel de editar
+        if (editar.clave_alumno == evento.getSource()) {
+            if (c < '0' || c > '9') {
+                evento.consume();
+            }
+        }
+
+        if (editar.condicion == evento.getSource()) {
+            if (editar.curp.getText().length() >= 18) {
+                evento.consume();
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
+                evento.consume();
+            }
+        }
+
+        if (editar.curp == evento.getSource()) {
+            if (editar.curp.getText().length() >= 18) {
+                evento.consume();
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') && (c != 'ñ') && (c != 'Ñ')) {
+                evento.consume();
+            }
+        }
+
+        if (editar.entidad_nacimiento == evento.getSource()) {
+            if (editar.entidad_nacimiento.getText().length() >= 45) {
+                evento.consume();
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
+                evento.consume();
+            }
+        }
+
+        if (editar.estatus == evento.getSource()) {
+            if (editar.estatus.getText().length() >= 30) {
+                evento.consume();
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
+                evento.consume();
+            }
+        }
+
+        if (editar.folio_boleta == evento.getSource()) {
+            if (c < '0' || c > '9') {
+                evento.consume();
+            }
+        }
+
+        if (editar.lengua_indigena == evento.getSource()) {
+            if (editar.lengua_indigena.getText().length() >= 30) {
+                evento.consume();
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
+                evento.consume();
+            }
+        }
+
+        if (editar.nombre_alumno == evento.getSource()) {
+            if (editar.nombre_alumno.getText().length() >= 45) {
+                evento.consume();
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
+                evento.consume();
+            }
+        }
+
+        if (editar.requisitos_faltantes == evento.getSource()) {
+            if (editar.requisitos_faltantes.getText().length() >= 100) {
+                evento.consume();
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ') && (c != '.') && (c != ',')) {
+                evento.consume();
+            }
+        }
     }
 
     @Override
@@ -401,6 +529,42 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             agregar.requisitos_faltantes.setText(agregar.requisitos_faltantes.getText().toUpperCase());
         }
 
+        if (editar.clave_alumno == evento.getSource()) {
+            editar.clave_alumno.setText(editar.clave_alumno.getText().toUpperCase());
+        }
+
+        if (editar.condicion == evento.getSource()) {
+            editar.condicion.setText(editar.condicion.getText().toUpperCase());
+        }
+
+        if (editar.curp == evento.getSource()) {
+            editar.curp.setText(editar.curp.getText().toUpperCase());
+        }
+
+        if (editar.entidad_nacimiento == evento.getSource()) {
+            editar.entidad_nacimiento.setText(editar.entidad_nacimiento.getText().toUpperCase());
+        }
+
+        if (editar.estatus == evento.getSource()) {
+            editar.estatus.setText(editar.estatus.getText().toUpperCase());
+        }
+
+        if (editar.folio_boleta == evento.getSource()) {
+            editar.folio_boleta.setText(editar.folio_boleta.getText().toUpperCase());
+        }
+
+        if (editar.lengua_indigena == evento.getSource()) {
+            editar.lengua_indigena.setText(editar.lengua_indigena.getText().toUpperCase());
+        }
+
+        if (editar.nombre_alumno == evento.getSource()) {
+            editar.nombre_alumno.setText(editar.nombre_alumno.getText().toUpperCase());
+        }
+
+        if (editar.requisitos_faltantes == evento.getSource()) {
+            editar.requisitos_faltantes.setText(editar.requisitos_faltantes.getText().toUpperCase());
+        }
+
     }
 
     // Metodo para limpiar los campos la momento de cambiar entre paneles
@@ -421,35 +585,15 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         //agregar.fechaBaja.setDate(null);
     }
 
-    public void imprimirDatosTabla(JTable table) {
-        TableModel model = table.getModel();
-        int rowCount = model.getRowCount();
-        int colCount = model.getColumnCount();
-
-        for (int i = 0; i < rowCount; i++) {
-            for (int j = 0; j < colCount; j++) {
-                System.out.print(model.getValueAt(i, j) + "\t");
-            }
-            System.out.println();  // Nueva línea para cada fila
-        }
-    }
-
     @Override
     public void valueChanged(ListSelectionEvent evento) {
         if (!evento.getValueIsAdjusting()) {
-            System.out.println("Metodo");
 
-            // Asegúrate de que haya al menos una fila seleccionada
-            int numRows = fua.tbl_alumns.getRowCount();
-            System.out.println("Número total de filas: " + numRows);
-            
             int selectedRows = this.fua.tbl_alumns.getSelectedRow();
-            System.out.print("Fila seleccionadas: " + selectedRows);
-            
+
             System.out.println();
-            
+
             if (selectedRows != -1) {
-                System.out.println("Fila seleccionada");
                 int selectedRow = selectedRows;
 
                 // Asegúrate de que la tabla tenga datos
@@ -458,7 +602,6 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     // Asegúrate de que la tabla tenga al menos 14 columnas (ajusta según sea necesario)
                     int numCols = fua.tbl_alumns.getColumnCount();
                     if (numCols == 14) {
-                        System.out.println("Llenando datos");
 
                         int clave = (int) fua.tbl_alumns.getValueAt(selectedRow, 0);
                         String curp = (String) fua.tbl_alumns.getValueAt(selectedRow, 1);
@@ -474,11 +617,9 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                         String estatus = (String) fua.tbl_alumns.getValueAt(selectedRow, 11);
                         int folioBoleta = (int) fua.tbl_alumns.getValueAt(selectedRow, 12);
                         String claveEscuela = (String) fua.tbl_alumns.getValueAt(selectedRow, 13);
-                        // ... obten valores de otras columnas según sea necesario
 
                         // Crea una instancia de Alumno con los valores obtenidos
                         alumnoSeleccionado = new Alumno(clave, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
-                        alumnoSeleccionado.printData();
                     }
                 }
             }
@@ -532,9 +673,9 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             this.nombre_director = escuela.nombre_director;
             this.ciclo_escolar = escuela.ciclo_escolar;
         }
-        
+
         //Metodo para ver los datos del objeto
-        public void printData(){
+        public void printData() {
             System.out.println("");
         }
         //Encapsulamiento generado con las anotaciones
@@ -607,12 +748,12 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             this.folioBoleta = alumno.folioBoleta;
             this.claveEscuela = alumno.claveEscuela;
         }
-        
+
         //Metodo para imprimir los datos del objeto
         //Metodo para ver los datos del objeto
-        public void printData(){
+        public void printData() {
             System.out.println("Clave Escuela:" + " Clave:" + clave + " Curp:" + curp + " Nombre:" + nombre
-                    + " Sexo:" + sexo + " Nacimiento:" +fechNacimiento + " EntNac:" + entNacimiento
+                    + " Sexo:" + sexo + " Nacimiento:" + fechNacimiento + " EntNac:" + entNacimiento
                     + " lengInd:" + lengIndigena + " Condicion:" + condicion + " ReqFalt:" + reqFaltantes
                     + " Alta:" + fechAlta + " Baja:" + fechBaja + " Estatus:" + estatus
                     + " FolioBoleta:" + folioBoleta + claveEscuela);
