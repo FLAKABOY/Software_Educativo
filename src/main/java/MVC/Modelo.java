@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -44,7 +46,7 @@ public class Modelo {
     }
 
     public static void altaAlumno(int claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
-             String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja,String estatus, int folio_boleta, String clave_escuela) {
+            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela) {
 
         //Se prepara la sentencia SQL
         String sql = "INSERT INTO Datos_alumnos (clave_alumnos,curp,nombre_alumno,sexo,fecha_nacimiento,entidad_nacimiento,lengua_indigena,condicion,requisitos_faltantes"
@@ -86,7 +88,7 @@ public class Modelo {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);    
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         System.out.println("ALUMNO");
     }
@@ -112,9 +114,9 @@ public class Modelo {
             JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     //Metodo para llenar el cb con clave de la escuela
-    public static void completeCbCalve(JComboBox cbE){
+    public static void completeCbCalve(JComboBox cbE) {
         //Limpiar el CB
         cbE.removeAllItems();
 
@@ -133,38 +135,128 @@ public class Modelo {
         }
     }
 
+    //Metodo para obtener los datos de la escuela a mostrar
     public static Controlador.Escuela completeData(String name) {
-    String sql = "SELECT * FROM Datos_escuela WHERE nombre_escuela = ?";
+        String sql = "SELECT * FROM Datos_escuela WHERE nombre_escuela = ?";
 
-    try (Connection con = conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
-        // Establecer el parámetro antes de ejecutar la consulta
-        ps.setString(1, name);
+        try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql)) {
+            // Establecer el parámetro antes de ejecutar la consulta
+            ps.setString(1, name);
 
-        try (ResultSet rs = ps.executeQuery()) {
-            // Verificar si se encontró alguna fila antes de intentar obtener datos
-            if (rs.next()) {
-                Controlador.Escuela escuela = new Controlador.Escuela(
-                        rs.getString("clave_escuela"),
-                        rs.getString("nombre_escuela"),
-                        rs.getString("turno"),
-                        rs.getInt("zona"),
-                        rs.getInt("grado"),
-                        rs.getString("grupo"),
-                        rs.getString("municipio"),
-                        rs.getString("nombre_director"),
-                        rs.getString("ciclo_escolar"));
+            try ( ResultSet rs = ps.executeQuery()) {
+                // Verificar si se encontró alguna fila antes de intentar obtener datos
+                if (rs.next()) {
+                    Controlador.Escuela escuela = new Controlador.Escuela(
+                            rs.getString("clave_escuela"),
+                            rs.getString("nombre_escuela"),
+                            rs.getString("turno"),
+                            rs.getInt("zona"),
+                            rs.getInt("grado"),
+                            rs.getString("grupo"),
+                            rs.getString("municipio"),
+                            rs.getString("nombre_director"),
+                            rs.getString("ciclo_escolar"));
 
-                // Retorna el objeto con los datos llenos
-                return escuela;
-            } else {
-                // Manejo de caso en el que no se encontraron resultados
-                System.out.println("No se encontraron datos para la escuela con nombre: " + name);
+                    // Retorna el objeto con los datos llenos
+                    return escuela;
+                } else {
+                    // Manejo de caso en el que no se encontraron resultados
+                    System.out.println("No se encontraron datos para la escuela con nombre: " + name);
+                }
             }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error: " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        return null;
     }
-    return null;
-    }
-}
 
+    public static JTable completeTable(JTable tabla, String name) {
+        String sql1 = "SELECT clave_escuela FROM Datos_escuela WHERE nombre_escuela = ?";
+        String sql2 = "SELECT * FROM Datos_alumnos WHERE clave = ?";
+        DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
+
+        try ( Connection con = conectar();  PreparedStatement ps1 = con.prepareStatement(sql1);  PreparedStatement ps2 = con.prepareStatement(sql2)) {
+
+            // Completar la consulta preparada
+            ps1.setString(1, name);
+
+            // Ejecutar la primera consulta
+            try ( ResultSet rs1 = ps1.executeQuery()) {
+                // Verificar si se encontró alguna fila antes de intentar la siguiente operación
+                if (!rs1.next()) {
+                    // No se encontraron resultados para la escuela con el nombre dado
+                    return null;
+                }
+
+                // Completar la consulta preparada para la segunda consulta
+                ps2.setString(1, rs1.getString("clave_escuela"));
+
+                // Ejecutar la segunda consulta
+                try ( ResultSet rs2 = ps2.executeQuery()) {
+                    // Verificar si existen resultados
+                    if (!rs2.next()) {
+                        // No se encontraron alumnos para la escuela
+                        return null;
+                    }
+
+                    // Limpiar modeloTabla antes de agregar nuevas filas
+                    modeloTabla.setRowCount(0);
+
+                    do {
+                        // Procesar la fila actual del ResultSet
+                        // Puedes acceder a las columnas utilizando métodos como rs2.getString("nombreColumna")
+                        // Crear un array de objetos para almacenar los datos de la fila
+                        Object[] fila = {
+                            rs2.getInt("clave_alumnos"),
+                            rs2.getString("curp"),
+                            rs2.getString("nombre_alumno"),
+                            rs2.getString("sexo"),
+                            rs2.getString("fecha_nacimiento"),
+                            rs2.getString("entidad_nacimiento"),
+                            rs2.getString("lengua_indigena"),
+                            rs2.getString("condicion"),
+                            rs2.getString("requisitos_faltantes"),
+                            rs2.getString("fecha_alta"),
+                            rs2.getString("fecha_baja"),
+                            rs2.getString("estatus"),
+                            rs2.getInt("folio_boleta"),
+                            rs2.getString("clave")
+                        };
+
+                        // Agregar la fila al modelo de la tabla
+                        modeloTabla.addRow(fila);
+
+                    } while (rs2.next());
+
+                    // Imprimir encabezados de columnas
+                    System.out.println("Columnas:");
+                    for (int i = 0; i < modeloTabla.getColumnCount(); i++) {
+                        System.out.print(modeloTabla.getColumnName(i) + "\t");
+                    }
+                    System.out.println("\n-----------------------------------");
+
+                    // Imprimir datos de la tabla
+                    for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+                        for (int j = 0; j < modeloTabla.getColumnCount(); j++) {
+                            System.out.print(modeloTabla.getValueAt(i, j) + "\t");
+                        }
+                        System.out.println();  // Nueva línea para la siguiente fila
+                    }
+
+                    // Actualizar el modelo de la tabla existente esto para no afectar al listener del modelo
+                    tabla.setModel(modeloTabla); // AGREGA ESTA LÍNEA
+
+                    //Retornar la tabla con los datos insertados
+                    return tabla;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        // En caso de que falle el método retornar null
+        return null;
+    }
+
+}

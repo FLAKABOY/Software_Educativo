@@ -20,6 +20,11 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +34,7 @@ import lombok.Setter;
  *
  * @author FLAKABOY
  */
-public class Controlador implements ActionListener, KeyListener {
+public class Controlador implements ActionListener, KeyListener, ListSelectionListener {
 
     //Atributos
     private Modelo modelo;
@@ -40,6 +45,8 @@ public class Controlador implements ActionListener, KeyListener {
     private Agregar agregar;
     //Panel para editar
     private Editar editar;
+    //Alumno seleccionado
+    Alumno alumnoSeleccionado;
 
     public Controlador(Vista vista, Modelo modelo) {
         vista.setVisible(true);
@@ -54,9 +61,13 @@ public class Controlador implements ActionListener, KeyListener {
         this.fua.btn_eliminar.addActionListener(this);
         this.fua.btn_editar.addActionListener(this);
         vista.bg = vista(fua);
-        Modelo.completeCbFua(fua.cb_school);
+        this.modelo.completeCbFua(fua.cb_school);
         //Se coloca el listener despues de llenar el CB para no generar NullPointerException
         this.fua.cb_school.addActionListener(this);
+        // Configurar el ListSelectionListener después de llenar la tabla
+        this.fua.tbl_alumns.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.fua.tbl_alumns.setRowSelectionAllowed(true);
+        this.fua.tbl_alumns.getSelectionModel().addListSelectionListener(this);
 
         //Instanmciar el panel de agregar
         this.agregar = new Agregar();
@@ -143,7 +154,6 @@ public class Controlador implements ActionListener, KeyListener {
                 //Programar las acciones para llenar dependiendo de la opcion seleccionada
                 //Se manda a llamar el metodo para obtener los datos de la escual y guardarlos en un objeto
                 Escuela es = Modelo.completeData(fua.cb_school.getSelectedItem().toString());
-                System.out.println("creo");
                 //Se procede a llenar los campos con la informacion obtenida
                 fua.lbClave.setText(es.clave_escuela);
                 fua.lbTurno.setText(es.turno);
@@ -152,7 +162,11 @@ public class Controlador implements ActionListener, KeyListener {
                 fua.lbGrupo.setText(es.grupo);
                 fua.lbMunicipio.setText(es.municipio);
                 fua.lbNombreDirector.setText(es.nombre_director);
+                //Llenar la tabla
+                fua.tbl_alumns = Modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
+
                 System.out.println("lleno");
+
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
                 e.printStackTrace(); // Imprime la traza de la excepción en la consola
@@ -178,7 +192,7 @@ public class Controlador implements ActionListener, KeyListener {
 
                         // Obtener la fecha de alta como cadena formateada
                         String fechaAltaString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaAlta.getDate());
-                        
+
                         // Llamar al método para agregar
                         Modelo.altaAlumno(
                                 Integer.parseInt(agregar.clave_alumno.getText()),
@@ -407,6 +421,70 @@ public class Controlador implements ActionListener, KeyListener {
         //agregar.fechaBaja.setDate(null);
     }
 
+    public void imprimirDatosTabla(JTable table) {
+        TableModel model = table.getModel();
+        int rowCount = model.getRowCount();
+        int colCount = model.getColumnCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
+                System.out.print(model.getValueAt(i, j) + "\t");
+            }
+            System.out.println();  // Nueva línea para cada fila
+        }
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent evento) {
+        if (!evento.getValueIsAdjusting()) {
+            System.out.println("Metodo");
+
+            // Asegúrate de que haya al menos una fila seleccionada
+            int numRows = fua.tbl_alumns.getRowCount();
+            System.out.println("Número total de filas: " + numRows);
+            
+            int selectedRows = this.fua.tbl_alumns.getSelectedRow();
+            System.out.print("Fila seleccionadas: " + selectedRows);
+            
+            System.out.println();
+            
+            if (selectedRows != -1) {
+                System.out.println("Fila seleccionada");
+                int selectedRow = selectedRows;
+
+                // Asegúrate de que la tabla tenga datos
+                if (fua.tbl_alumns.getRowCount() > 0) {
+
+                    // Asegúrate de que la tabla tenga al menos 14 columnas (ajusta según sea necesario)
+                    int numCols = fua.tbl_alumns.getColumnCount();
+                    if (numCols == 14) {
+                        System.out.println("Llenando datos");
+
+                        int clave = (int) fua.tbl_alumns.getValueAt(selectedRow, 0);
+                        String curp = (String) fua.tbl_alumns.getValueAt(selectedRow, 1);
+                        String nombre = (String) fua.tbl_alumns.getValueAt(selectedRow, 2);
+                        String sexo = (String) fua.tbl_alumns.getValueAt(selectedRow, 3);
+                        String fechNacimiento = (String) fua.tbl_alumns.getValueAt(selectedRow, 4);
+                        String entNacimiento = (String) fua.tbl_alumns.getValueAt(selectedRow, 5);
+                        String lengIndigena = (String) fua.tbl_alumns.getValueAt(selectedRow, 6);
+                        String condicion = (String) fua.tbl_alumns.getValueAt(selectedRow, 7);
+                        String reqFaltantes = (String) fua.tbl_alumns.getValueAt(selectedRow, 8);
+                        String fechAlta = (String) fua.tbl_alumns.getValueAt(selectedRow, 9);
+                        String fechBaja = (String) fua.tbl_alumns.getValueAt(selectedRow, 10);
+                        String estatus = (String) fua.tbl_alumns.getValueAt(selectedRow, 11);
+                        int folioBoleta = (int) fua.tbl_alumns.getValueAt(selectedRow, 12);
+                        String claveEscuela = (String) fua.tbl_alumns.getValueAt(selectedRow, 13);
+                        // ... obten valores de otras columnas según sea necesario
+
+                        // Crea una instancia de Alumno con los valores obtenidos
+                        alumnoSeleccionado = new Alumno(clave, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
+                        alumnoSeleccionado.printData();
+                    }
+                }
+            }
+        }
+    }
+
     //Crear una subclase para poder completar los campos
     @NoArgsConstructor  // Genera un constructor sin argumentos
     @AllArgsConstructor //Genera constructor de parametros automaticamente
@@ -442,6 +520,103 @@ public class Controlador implements ActionListener, KeyListener {
         private String ciclo_escolar;
 
         //Constructores generados automaticamente con las anotaciones
+        //Constructor de copia
+        public Escuela(Escuela escuela) {
+            this.clave_escuela = escuela.clave_escuela;
+            this.nombre_escuela = escuela.nombre_escuela;
+            this.turno = escuela.turno;
+            this.zona = escuela.zona;
+            this.grado = escuela.grado;
+            this.grupo = escuela.grupo;
+            this.municipio = escuela.municipio;
+            this.nombre_director = escuela.nombre_director;
+            this.ciclo_escolar = escuela.ciclo_escolar;
+        }
+        
+        //Metodo para ver los datos del objeto
+        public void printData(){
+            System.out.println("");
+        }
+        //Encapsulamiento generado con las anotaciones
+    }
+
+    //Crear una subclase para poder obtener los datos del alumno en la tabla
+    @NoArgsConstructor  // Genera un constructor sin argumentos
+    @AllArgsConstructor //Genera constructor de parametros automaticamente
+    public static class Alumno {
+
+        //Atributos
+        @Getter
+        @Setter
+        private int clave;
+        @Getter
+        @Setter
+        private String curp;
+        @Getter
+        @Setter
+        private String nombre;
+        @Getter
+        @Setter
+        private String sexo;
+        @Getter
+        @Setter
+        private String fechNacimiento;
+        @Getter
+        @Setter
+        private String entNacimiento;
+        @Getter
+        @Setter
+        private String lengIndigena;
+        @Getter
+        @Setter
+        private String condicion;
+        @Getter
+        @Setter
+        private String reqFaltantes;
+        @Getter
+        @Setter
+        private String fechAlta;
+        @Getter
+        @Setter
+        private String fechBaja;
+        @Getter
+        @Setter
+        private String estatus;
+        @Getter
+        @Setter
+        private int folioBoleta;
+        @Getter
+        @Setter
+        private String claveEscuela;
+
+        //Constructores generados automaticamente con las anotaciones
+        //Constructor de copia
+        public Alumno(Alumno alumno) {
+            this.clave = alumno.clave;
+            this.curp = alumno.curp;
+            this.nombre = alumno.nombre;
+            this.sexo = alumno.sexo;
+            this.fechNacimiento = alumno.fechNacimiento;
+            this.entNacimiento = alumno.entNacimiento;
+            this.lengIndigena = alumno.lengIndigena;
+            this.condicion = alumno.condicion;
+            this.reqFaltantes = alumno.reqFaltantes;
+            this.fechAlta = alumno.fechAlta;
+            this.fechBaja = alumno.fechBaja;
+            this.estatus = alumno.estatus;
+            this.folioBoleta = alumno.folioBoleta;
+            this.claveEscuela = alumno.claveEscuela;
+        }
+        
+        //Metodo para imprimir los datos del objeto
+        //Metodo para ver los datos del objeto
+        public void printData(){
+            System.out.println("Clave Escuela:" + " Clave:" + clave + " Curp:" + curp + " Nombre:" + nombre
+                    + " Sexo:" + sexo + " Nacimiento:" +fechNacimiento + " EntNac:" + entNacimiento
+                    + " lengInd:" + lengIndigena + " Condicion:" + condicion + " ReqFalt:" + reqFaltantes
+                    + " Alta:" + fechAlta + " Baja:" + fechBaja + " Estatus:" + estatus
+                    + " FolioBoleta:" + folioBoleta + claveEscuela);
+        }
         //Encapsulamiento generado con las anotaciones
     }
 }

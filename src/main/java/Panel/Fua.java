@@ -42,7 +42,6 @@ public class Fua extends javax.swing.JPanel {
         btn_eliminar = new javax.swing.JButton();
         btn_agregar = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
-        jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -62,6 +61,8 @@ public class Fua extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         cb_school = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_alumns = new javax.swing.JTable();
         fondo_2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -100,19 +101,6 @@ public class Fua extends javax.swing.JPanel {
         btn_editar.setText("Editar");
         btn_editar.setPreferredSize(new java.awt.Dimension(80, 32));
         add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 920, 100, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7 ", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14"
-            }
-        ));
-        add(jTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 860, 400));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sello__2_-removebg-preview.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 70));
@@ -182,7 +170,7 @@ public class Fua extends javax.swing.JPanel {
         lbZona.setBackground(new java.awt.Color(255, 255, 255));
         lbZona.setForeground(new java.awt.Color(0, 0, 0));
         lbZona.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbZona, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 40, 20));
+        add(lbZona, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 220, 40, 20));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -192,7 +180,7 @@ public class Fua extends javax.swing.JPanel {
         lbMunicipio.setBackground(new java.awt.Color(255, 255, 255));
         lbMunicipio.setForeground(new java.awt.Color(0, 0, 0));
         lbMunicipio.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 290, 90, 20));
+        add(lbMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 290, 90, 20));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -207,6 +195,22 @@ public class Fua extends javax.swing.JPanel {
         jLabel12.setText("Educacion preescolar");
         jLabel12.setToolTipText("");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
+
+        tbl_alumns.setBackground(new java.awt.Color(255, 255, 255));
+        tbl_alumns.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "IDCLAVE DEL ALUMNO", "CURP", "NOMBRE DEL ALUMNO", "SEXO", "FECHA DE NACIMIENTO", "ENTIDAD DE NACIMIENTO", "LENGUA INDIGENA", "CONDICIÓN", "REQUISITOS FALTANTES", "FECHA ALTA", "FECHA BAJA", "ESTATUS", "FOLIO BOLETA", "CLAVE DE LA ESCUELA"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_alumns);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 540, 1000, 350));
 
         fondo_2.setBackground(new java.awt.Color(204, 204, 204));
         add(fondo_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 90));
@@ -240,7 +244,7 @@ public class Fua extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    public javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lbClave;
     public javax.swing.JLabel lbGrado;
     public javax.swing.JLabel lbGrupo;
@@ -248,5 +252,6 @@ public class Fua extends javax.swing.JPanel {
     public javax.swing.JLabel lbNombreDirector;
     public javax.swing.JLabel lbTurno;
     public javax.swing.JLabel lbZona;
+    public javax.swing.JTable tbl_alumns;
     // End of variables declaration//GEN-END:variables
 }

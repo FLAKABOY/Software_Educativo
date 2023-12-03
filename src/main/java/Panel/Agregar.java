@@ -130,7 +130,7 @@ public class Agregar extends javax.swing.JPanel {
         jPanel1.add(curp, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 560, -1));
         jPanel1.add(folio_boleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 850, 560, -1));
 
-        sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
+        sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMENINO" }));
         jPanel1.add(sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 160, -1));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
