@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -78,9 +77,9 @@ public class Modelo {
 
             // Verificar si se insertaron filas correctamente y mostrar un mensaje
             if (filasInsertadas > 0) {
-                JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
+                JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE", "EXITO", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR AL REGISTRAR EL USUARIO");
+                JOptionPane.showMessageDialog(null, "ERROR AL REGISTRAR EL USUARIO", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
             //La conexion se cierra automaticamente debido al try-with-resources.
 
@@ -178,7 +177,7 @@ public class Modelo {
                     return escuela;
                 } else {
                     // Manejo de caso en el que no se encontraron resultados
-                    System.out.println("No se encontraron datos para la escuela con nombre: " + name);
+                    JOptionPane.showMessageDialog(null, "No se encontraron datos para la escuela con nombre: " + name, "SIN DATOS", JOptionPane.WARNING_MESSAGE);
                 }
             }
         } catch (SQLException e) {
@@ -304,9 +303,9 @@ public class Modelo {
 
             // Verificar si se insertaron filas correctamente y mostrar un mensaje
             if (filasInsertadas > 0) {
-                JOptionPane.showMessageDialog(null, "USUARIO ACTUALIZADO");
+                JOptionPane.showMessageDialog(null, "Alumno actualizado correctamente.", "ALUMNO ACTUALIZADO", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR AL ACTUALIZAR LOS DATOS");
+                JOptionPane.showMessageDialog(null, "Error al actualizar los datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
             //La conexion se cierra automaticamente debido al try-with-resources.
 
@@ -358,4 +357,29 @@ public class Modelo {
         // En caso de que falle el método retornar null
         return null;
     }
+    
+    public static void updateSchool(String cvlave){
+        
+    }
+
+    public static void deleteAlumn(int clave) {
+        String sql = "DELETE FROM Datos_alumnos WHERE clave_alumnos = ?";
+
+        try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, clave);
+
+            // Ejecutar la consulta de eliminación
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente.", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró ningún registro con la clave especificada.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }

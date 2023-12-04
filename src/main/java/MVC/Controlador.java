@@ -219,7 +219,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     //Mostrar el panel de editar
                     vista.bg = vista(editar);
                 } else {
-                    JOptionPane.showMessageDialog(null, "FAVOR DE SELECCIONAR UN ALUMNO DE LA TABLA");
+                    JOptionPane.showMessageDialog(null, "Favor de seleccionar un alumno de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -230,7 +230,16 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (fua.btn_eliminar == evento.getSource()) {
             //Programar la logica para eliminar logicamente un alumno 
             try {
-
+                //Validar que el alumno seleccionado no sea null
+                if (alumnoSeleccionado != null){
+                    //Llamar al metodo de eliminar alumno
+                    modelo.deleteAlumn(alumnoSeleccionado.clave);
+                    fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
+                    
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Favor de seleccionar un alumno.", "Seleccione un alumno", JOptionPane.WARNING_MESSAGE);
+                }
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -238,7 +247,6 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (fua.cb_school == evento.getSource()) {
             //Programar la logica para eliminar logicamente un alumno 
             try {
-                System.out.println("Entro");
                 //Programar las acciones para llenar dependiendo de la opcion seleccionada
                 //Se manda a llamar el metodo para obtener los datos de la escual y guardarlos en un objeto
                 Escuela es = Modelo.completeData(fua.cb_school.getSelectedItem().toString());
@@ -252,8 +260,6 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 fua.lbNombreDirector.setText(es.nombre_director);
                 //Llenar la tabla
                 fua.tbl_alumns = Modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
-
-                System.out.println("lleno");
 
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -297,7 +303,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                                 agregar.estatus.getText(),
                                 Integer.parseInt(agregar.folio_boleta.getText()),
                                 agregar.clave_Escuela.getSelectedItem().toString()
-                        );
+                        );                       
                     } else {
                         // Obtener la fecha de nacimiento como cadena formateada
                         String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaNacimiento.getDate());
@@ -342,6 +348,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (agregar.btn_atras == evento.getSource()) {
             //Programar la muestra del panel principal
             try {
+                limpiarCampos();
+                fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -411,6 +419,12 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                                 editar.clave_Escuela.getSelectedItem().toString()
                         );
                     }
+                    //Limpiar los campos
+                    limpiarCampos();
+                    //Actualizar los datos de la tabla
+                    fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
+                    //Regrear al panel principal
+                    vista.bg = vista(fua);
                 }
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -422,6 +436,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             try {
                 limpiarCampos();
                 alumnoSeleccionado = null;
+                fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -858,6 +873,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             String claveEscuela = (String) fua.tbl_alumns.getValueAt(selectedRow, 13);
 
             // Crea una instancia de Alumno con los valores obtenidos
+            //Esto para evitar pasar al panel de editar alumnos sin datos
             alumnoSeleccionado = new Alumno(clave, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
         } else if (selectedRowsEscuelas != -1 && editarEscuela.Tabla_escuelas.getRowCount() > 0 && editarEscuela.Tabla_escuelas.getColumnCount() == 9) {
             int selectedRow = selectedRowsEscuelas;
@@ -871,8 +887,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             String director = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 7);
             String ciclo = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 8);
 
-            // Crear una instancia de escuela
-            //escuelaSeleccionada = new Escuela(clave, nombre, turno, zona, grado, grupo, municipio, director, ciclo);
+            
             //Colocar los datos donde corresponde
             editarEscuela.txt_clave.setText(clave);
             editarEscuela.txt_nombre.setText(nombre);
