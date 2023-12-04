@@ -57,8 +57,6 @@ public class Modelo {
         try ( Connection con = conectar(); //Se establece la conexion
                   PreparedStatement comando = con.prepareStatement(sql)) {
 
-            System.out.println("Fecha de nacimiento: " + fecha_nacimiento);
-            System.out.println("Fecha de alta: " + fecha_alta);
             // Establecer los valores de los parámetros en el PreparedStatement
             comando.setInt(1, claveAlumno);
             comando.setString(2, curp);
@@ -90,7 +88,6 @@ public class Modelo {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        System.out.println("ALUMNO");
     }
 
     //Metodo para llenar el CB del panel principal para hacer la busqueda
@@ -131,6 +128,26 @@ public class Modelo {
             }
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    //Metodo para llenar un cb quitando el que ya esta colocado
+    public static void dataCb (String clave, JComboBox cb){
+        //Limpiar el CB
+        cb.removeAllItems();
+        
+        /*Se declaran los recursos que utilizara el metodo para que al terminar
+         el bloque try estos se cierren automaticamente (Pricipalmente la conexion)*/
+        String sql = "SELECT clave_escuela FROM Datos_escuela";
+         try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql);  ResultSet resultado = ps.executeQuery();){
+              while (resultado.next()) {
+                String escuela = resultado.getString("clave_escuela");
+                if(escuela != clave){
+                    cb.addItem(escuela);
+                }
+            }
+         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -259,4 +276,58 @@ public class Modelo {
         return null;
     }
 
+    public static void updateAlumns(int claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
+            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela){
+        //Consulta SQL
+        String sql = "UPDATE Datos_alumnos SET "
+        + "clave_alumnos=?, "
+        + "curp=?, "
+        + "nombre_alumno=?, "
+        + "sexo=?, "
+        + "fecha_nacimiento=?, "
+        + "entidad_nacimiento=?, "
+        + "lengua_indigena=?, "
+        + "condicion=?, "
+        + "requisitos_faltantes=?, "
+        + "fecha_alta=?, "
+        + "fecha_baja=?, "
+        + "estatus=?, "
+        + "folio_boleta=?, "
+        + "clave=? "
+        + "WHERE clave_alumnos=?";
+        
+        try (Connection con = conectar(); PreparedStatement ps = con.prepareStatement(sql)){
+            //Establecer los valores de la consulta preparada (PreparedStatement)
+            ps.setInt(1, claveAlumno);
+            ps.setString(2, curp);
+            ps.setString(3, nombre_alumno);
+            ps.setString(4, sexo);
+            ps.setString(5, fecha_nacimiento);
+            ps.setString(6, entidad_nacimiento);
+            ps.setString(7, lengua_indigena);
+            ps.setString(8, condicion);
+            ps.setString(9, requisitos_faltantes);
+            ps.setString(10, fecha_alta);
+            ps.setString(11, fecha_baja);
+            ps.setString(12, estatus);
+            ps.setInt(13, folio_boleta);
+            ps.setString(14, clave_escuela);
+            ps.setInt(15, claveAlumno);
+            
+            // Ejecutar la consulta de inserción y obtener el número de filas afectadas
+            int filasInsertadas = ps.executeUpdate();
+            
+            // Verificar si se insertaron filas correctamente y mostrar un mensaje
+            if (filasInsertadas > 0) {
+                JOptionPane.showMessageDialog(null, "USUARIO ACTUALIZADO");
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL ACTUALIZAR LOS DATOS");
+            }
+            //La conexion se cierra automaticamente debido al try-with-resources.
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

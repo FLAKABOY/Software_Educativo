@@ -42,6 +42,8 @@ public class Editar extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        clave_Escuela = new javax.swing.JComboBox<>();
         sexo = new javax.swing.JComboBox<>();
         condicion = new javax.swing.JTextField();
         lengua_indigena = new javax.swing.JTextField();
@@ -73,88 +75,96 @@ public class Editar extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Curp:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, 20));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Condicion:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 590, -1, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 620, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nombre del alumno:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Sexo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, 20));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Fecha de nacimiento:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, 20));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Entidad de nacimiento:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, -1, 20));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Lengua indigena:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Fecha de baja:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 750, -1, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 780, -1, 20));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Requisitos faltantes:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 640, -1, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 670, -1, 20));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Fecha de alta:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 700, -1, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 730, -1, 20));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Estatus:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 810, -1, 30));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 840, -1, 30));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Folio de boleta:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 870, -1, 20));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 900, -1, 20));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Clave del alumno:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, 20));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, 20));
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setText("Clave de la escuela:");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
+
+        clave_Escuela.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(clave_Escuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 140, -1));
 
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
-        jPanel1.add(condicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 540, -1));
-        jPanel1.add(lengua_indigena, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 540, -1));
-        jPanel1.add(curp, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 540, -1));
-        jPanel1.add(nombre_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 540, -1));
-        jPanel1.add(entidad_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 540, -1));
-        jPanel1.add(requisitos_faltantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 640, 540, -1));
-        jPanel1.add(estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 810, 540, -1));
-        jPanel1.add(folio_boleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 870, 540, -1));
-        jPanel1.add(clave_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 540, -1));
-        jPanel1.add(fecha_baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 750, 260, -1));
-        jPanel1.add(fecha_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 260, -1));
-        jPanel1.add(fecha_alta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 700, 260, -1));
+        jPanel1.add(sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, -1, -1));
+        jPanel1.add(condicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 620, 540, -1));
+        jPanel1.add(lengua_indigena, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, 540, -1));
+        jPanel1.add(curp, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 540, -1));
+        jPanel1.add(nombre_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 540, -1));
+        jPanel1.add(entidad_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, 540, -1));
+        jPanel1.add(requisitos_faltantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 670, 540, -1));
+        jPanel1.add(estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 840, 540, -1));
+        jPanel1.add(folio_boleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 900, 540, -1));
+        jPanel1.add(clave_alumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 540, -1));
+        jPanel1.add(fecha_baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 780, 260, -1));
+        jPanel1.add(fecha_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 260, -1));
+        jPanel1.add(fecha_alta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 730, 260, -1));
 
         btn_aceptar.setBackground(new java.awt.Color(255, 255, 255));
         btn_aceptar.setForeground(new java.awt.Color(0, 255, 0));
         btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
         btn_aceptar.setText("Aceptar");
-        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 930, 120, 40));
+        jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 960, 120, 40));
 
         btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras{.png"))); // NOI18N
         jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
@@ -184,6 +194,7 @@ public class Editar extends javax.swing.JPanel {
     private javax.swing.JLabel Fondo;
     public javax.swing.JButton btn_aceptar;
     public javax.swing.JButton btn_atras;
+    public javax.swing.JComboBox<String> clave_Escuela;
     public javax.swing.JTextField clave_alumno;
     public javax.swing.JTextField condicion;
     public javax.swing.JTextField curp;
@@ -200,6 +211,7 @@ public class Editar extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

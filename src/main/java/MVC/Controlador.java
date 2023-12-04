@@ -172,7 +172,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     editar.entidad_nacimiento.setText(alumnoSeleccionado.entNacimiento);
                     editar.estatus.setText(alumnoSeleccionado.estatus);
                     editar.fecha_alta.setDate(fechaAlt);
-                    editar.fecha_baja.setDate(fechaBaj);
+                    editar.fecha_baja.setDate(alumnoSeleccionado.fechBaja.equals("0000-00-00") ? null : fechaBaj);
                     editar.fecha_nacimiento.setDate(fechaNac);
                     editar.folio_boleta.setText(Integer.toString(alumnoSeleccionado.folioBoleta));
                     editar.lengua_indigena.setText(alumnoSeleccionado.lengIndigena);
@@ -187,6 +187,10 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                     editar.sexo.addItem(sexo.equals("Femenino") ? "Femenino" : "Masculino");
                     editar.sexo.addItem(sexo.equals("Masculino") ? "Femenino" : "Masculino");
+
+                    //Llenar el cb de escuela
+                    editar.clave_Escuela.addItem(alumnoSeleccionado.claveEscuela);
+                    modelo.dataCb(alumnoSeleccionado.claveEscuela, editar.clave_Escuela);
 
                     //Mostrar el panel de editar
                     vista.bg = vista(editar);
@@ -325,14 +329,74 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         if (editar.btn_aceptar == evento.getSource()) {
             //Se programa la logica para poder editar un alumno
             try {
+                // Validar que los campos no estén vacíos
+                if (!editar.clave_alumno.getText().isEmpty()
+                        && !editar.curp.getText().isEmpty()
+                        && !editar.nombre_alumno.getText().isEmpty()
+                        && !editar.fecha_nacimiento.getDateFormatString().isEmpty()
+                        && !editar.entidad_nacimiento.getText().isEmpty()
+                        && !editar.fecha_alta.getDateFormatString().isEmpty()) {
+                    //Hacer el formato de fecha para SQL
+                    String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(editar.fecha_nacimiento.getDate());
+                    String fechaAltaString = new SimpleDateFormat("yyyy-MM-dd").format(editar.fecha_alta.getDate());
+                    
+                    String fechaBajaString;
 
+
+                    if (editar.fecha_baja.getDate() != null) {
+                        fechaBajaString = new SimpleDateFormat("yyyy-MM-dd").format(editar.fecha_baja.getDate());
+                    } else {
+                        // Puedes asignar un valor por defecto o manejar el caso de "0000-00-00" según tus necesidades
+                        fechaBajaString = "0000-00-00";
+                    }
+
+                    if (fechaBajaString != "0000-00-00") {
+                        //Mandar a llamar el metodo para actualizar los datos
+                        modelo.updateAlumns(
+                                Integer.parseInt(editar.clave_alumno.getText()),
+                                editar.curp.getText(),
+                                editar.nombre_alumno.getText(),
+                                editar.sexo.getSelectedItem().toString(),
+                                fechaNacimientoString,
+                                editar.entidad_nacimiento.getText(),
+                                editar.lengua_indigena.getText(),
+                                editar.condicion.getText(),
+                                editar.requisitos_faltantes.getText(),
+                                fechaAltaString,
+                                fechaBajaString,
+                                editar.estatus.getText(),
+                                Integer.parseInt(editar.folio_boleta.getText()),
+                                editar.clave_Escuela.getSelectedItem().toString()
+                        );
+                    } else {
+                        System.out.println("Fecha:" + fechaBajaString + "Folio:"+editar.folio_boleta.getText());
+                        modelo.updateAlumns(
+                                Integer.parseInt(editar.clave_alumno.getText()),
+                                editar.curp.getText(),
+                                editar.nombre_alumno.getText(),
+                                editar.sexo.getSelectedItem().toString(),
+                                fechaNacimientoString,
+                                editar.entidad_nacimiento.getText(),
+                                editar.lengua_indigena.getText(),
+                                editar.condicion.getText(),
+                                editar.requisitos_faltantes.getText(),
+                                fechaAltaString,
+                                fechaBajaString,
+                                editar.estatus.getText(),
+                                Integer.parseInt(editar.folio_boleta.getText()),
+                                editar.clave_Escuela.getSelectedItem().toString()
+                        );
+                    }
+                }
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         } else if (editar.btn_atras == evento.getSource()) {
             //Regresal al panel principal
             try {
+                limpiarCampos();
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -582,7 +646,27 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         agregar.folio_boleta.setText("");
 
         //Linea para editar
-        //agregar.fechaBaja.setDate(null);
+        editar.clave_alumno.setText("");
+        editar.curp.setText("");
+        editar.nombre_alumno.setText("");
+        editar.fecha_nacimiento.setDate(null);
+        editar.entidad_nacimiento.setText("");
+        editar.lengua_indigena.setText("");
+        editar.condicion.setText("");
+        editar.requisitos_faltantes.setText("");
+        editar.fecha_alta.setDate(null);
+        editar.fecha_baja.setDate(null);
+        editar.estatus.setText("");
+        editar.folio_boleta.setText("");
+        
+        //Limpiar los labels de fua
+        fua.lbClave.setText("");
+        fua.lbGrado.setText("");
+        fua.lbGrupo.setText("");
+        fua.lbMunicipio.setText("");
+        fua.lbNombreDirector.setText("");
+        fua.lbTurno.setText("");
+        fua.lbZona.setText("");
     }
 
     @Override
