@@ -205,7 +205,7 @@ public class Fua extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "IDCLAVE DEL ALUMNO", "CURP", "NOMBRE DEL ALUMNO", "SEXO", "FECHA DE NACIMIENTO", "ENTIDAD DE NACIMIENTO", "LENGUA INDIGENA", "CONDICIÓN", "REQUISITOS FALTANTES", "FECHA ALTA", "FECHA BAJA", "ESTATUS", "FOLIO BOLETA", "CLAVE DE LA ESCUELA"
+                "CLAVE DEL ALUMNO", "CURP", "NOMBRE DEL ALUMNO", "SEXO", "FECHA DE NACIMIENTO", "ENTIDAD DE NACIMIENTO", "LENGUA INDIGENA", "CONDICIÓN", "REQUISITOS FALTANTES", "FECHA ALTA", "FECHA BAJA", "ESTATUS", "FOLIO BOLETA", "CLAVE DE LA ESCUELA"
             }
         ));
         jScrollPane1.setViewportView(tbl_alumns);

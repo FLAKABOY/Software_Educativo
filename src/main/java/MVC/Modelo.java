@@ -261,7 +261,7 @@ public class Modelo {
     }
 
     public static void updateAlumns(int claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
-            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela) {
+            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela, int claveVieja) {
         //Consulta SQL
         String sql = "UPDATE Datos_alumnos SET "
                 + "clave_alumnos=?, "
@@ -296,7 +296,7 @@ public class Modelo {
             ps.setString(12, estatus);
             ps.setInt(13, folio_boleta);
             ps.setString(14, clave_escuela);
-            ps.setInt(15, claveAlumno);
+            ps.setInt(15, claveVieja);
 
             // Ejecutar la consulta de inserción y obtener el número de filas afectadas
             int filasInsertadas = ps.executeUpdate();
@@ -358,8 +358,47 @@ public class Modelo {
         return null;
     }
     
-    public static void updateSchool(String cvlave){
+    public static void updateSchool(String clave, String nombreEscuela, String turno, int zona, int grado, String grupo, String municipio,
+            String director, String ciclo, String claveAnteriro){
+        String sql = "UPDATE Datos_escuela SET "
+                + "clave_escuela = ?, "
+                + "nombre_escuela = ?, "
+                + "turno = ?, "
+                + "zona = ?, "
+                + "grado = ?, "
+                + "grupo = ?, "
+                + "municipio = ?, "
+                + "nombre_director = ?, "
+                + "ciclo_escolar = ?"
+                + "WHERE clave_escuela = ?";
         
+        try (Connection con = conectar(); PreparedStatement ps = con.prepareStatement(sql);){
+            //Establecer los valores de la consulta preparada (PreparedStatement)
+            ps.setString(1, clave);
+            ps.setString(2, nombreEscuela);
+            ps.setString(3, turno);
+            ps.setInt(4, zona);
+            ps.setInt(5, grado);
+            ps.setString(6, grupo);
+            ps.setString(7, municipio);
+            ps.setString(8, director);
+            ps.setString(9, ciclo);
+            ps.setString(10, claveAnteriro);
+            
+            // Ejecutar la consulta de inserción y obtener el número de filas afectadas
+             int filasInsertadas = ps.executeUpdate();
+             
+             // Verificar si se insertaron filas correctamente y mostrar un mensaje
+            if (filasInsertadas > 0) {
+                JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.", "ESCUELA ACTUALIZADA", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar los datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            //La conexion se cierra automaticamente debido al try-with-resources.
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void deleteAlumn(int clave) {

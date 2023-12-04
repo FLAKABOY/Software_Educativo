@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.input.KeyCode;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -87,7 +88,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         //Asignar un listener al boton
         this.editar.btn_aceptar.addActionListener(this);
         this.editar.btn_atras.addActionListener(this);
-        
+
         //Instanciar el panel de Editar escuela
         this.editarEscuela = new Editar_escuela();
         this.editarEscuela.btn_Aceptar.addActionListener(this);
@@ -115,7 +116,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         this.editar.lengua_indigena.addKeyListener(this);
         this.editar.nombre_alumno.addKeyListener(this);
         this.editar.requisitos_faltantes.addKeyListener(this);
-        
+
         //Agregar un listener para los Jtext de editar escuela
         this.editarEscuela.txt_clave.addKeyListener(this);
         this.editarEscuela.txt_turno.addKeyListener(this);
@@ -231,13 +232,12 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             //Programar la logica para eliminar logicamente un alumno 
             try {
                 //Validar que el alumno seleccionado no sea null
-                if (alumnoSeleccionado != null){
+                if (alumnoSeleccionado != null) {
                     //Llamar al metodo de eliminar alumno
                     modelo.deleteAlumn(alumnoSeleccionado.clave);
                     fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
-                    
-                }
-                else{
+
+                } else {
                     JOptionPane.showMessageDialog(null, "Favor de seleccionar un alumno.", "Seleccione un alumno", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (RuntimeException e) {
@@ -303,7 +303,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                                 agregar.estatus.getText(),
                                 Integer.parseInt(agregar.folio_boleta.getText()),
                                 agregar.clave_Escuela.getSelectedItem().toString()
-                        );                       
+                        );
                     } else {
                         // Obtener la fecha de nacimiento como cadena formateada
                         String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaNacimiento.getDate());
@@ -356,7 +356,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         }
-        
+
         //Se programan todos los botones de editar
         if (editar.btn_aceptar == evento.getSource()) {
             //Se programa la logica para poder editar un alumno
@@ -371,9 +371,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     //Hacer el formato de fecha para SQL
                     String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(editar.fecha_nacimiento.getDate());
                     String fechaAltaString = new SimpleDateFormat("yyyy-MM-dd").format(editar.fecha_alta.getDate());
-                    
-                    String fechaBajaString;
 
+                    String fechaBajaString;
 
                     if (editar.fecha_baja.getDate() != null) {
                         fechaBajaString = new SimpleDateFormat("yyyy-MM-dd").format(editar.fecha_baja.getDate());
@@ -398,10 +397,11 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                                 fechaBajaString,
                                 editar.estatus.getText(),
                                 Integer.parseInt(editar.folio_boleta.getText()),
-                                editar.clave_Escuela.getSelectedItem().toString()
+                                editar.clave_Escuela.getSelectedItem().toString(),
+                                alumnoSeleccionado.clave
                         );
                     } else {
-                        System.out.println("Fecha:" + fechaBajaString + "Folio:"+editar.folio_boleta.getText());
+                        System.out.println("Fecha:" + fechaBajaString + "Folio:" + editar.folio_boleta.getText());
                         modelo.updateAlumns(
                                 Integer.parseInt(editar.clave_alumno.getText()),
                                 editar.curp.getText(),
@@ -416,7 +416,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                                 fechaBajaString,
                                 editar.estatus.getText(),
                                 Integer.parseInt(editar.folio_boleta.getText()),
-                                editar.clave_Escuela.getSelectedItem().toString()
+                                editar.clave_Escuela.getSelectedItem().toString(),
+                                alumnoSeleccionado.clave
                         );
                     }
                     //Limpiar los campos
@@ -425,6 +426,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                     //Regrear al panel principal
                     vista.bg = vista(fua);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Favor de llenar los campos correspondientes.", "CAMPOS FALTANTES", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -443,22 +446,45 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         }
-        
+
         //Panel de editar escuela
-        if(editarEscuela.btn_Aceptar == evento.getSource()){
+        if (editarEscuela.btn_Aceptar == evento.getSource()) {
             //Programar la muestra del panel principal
             try {
-               //Programar la actualizacion de los datos de la escuela
+                //Programar la actualizacion de los datos de la escuela
+                //Validar que los campos no esten vacios
+                if (!editarEscuela.txt_Ciclo.getText().isEmpty()
+                        && !editarEscuela.txt_clave.getText().isEmpty()
+                        && !editarEscuela.txt_grado.getText().isEmpty()
+                        && !editarEscuela.txt_grupo.getText().isEmpty()
+                        && !editarEscuela.txt_municipio.getText().isEmpty()
+                        && !editarEscuela.txt_nombre.getText().isEmpty()
+                        && !editarEscuela.txt_nombreDire.getText().isEmpty()
+                        && !editarEscuela.txt_turno.getText().isEmpty()
+                        && !editarEscuela.txt_zona.getText().isEmpty()) {
+                    //Llamar al metodo que actualiza los datos
+                    modelo.updateSchool(editarEscuela.txt_clave.getText(), editarEscuela.txt_nombre.getText(),
+                            editarEscuela.txt_turno.getText(), Integer.parseInt(editarEscuela.txt_zona.getText()),
+                            Integer.parseInt(editarEscuela.txt_grado.getText()), editarEscuela.txt_grupo.getText(),
+                            editarEscuela.txt_municipio.getText(), editarEscuela.txt_nombreDire.getText(),
+                            editarEscuela.txt_Ciclo.getText(), escuelaSeleccionada.clave_escuela);
+
+                    limpiarCampos();
+                    //Regresar al panel principal
+                    vista.bg = vista(fua);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Favor de llenar los campos correspondientes.", "CAMPOS FALTANTES", JOptionPane.WARNING_MESSAGE);
+                }
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
-        }
-        else if(editarEscuela.btn_atras == evento.getSource()){
+        } else if (editarEscuela.btn_atras == evento.getSource()) {
             //Programar la muestra del panel principal
             try {
                 limpiarCampos();
                 escuelaSeleccionada = null;
+                modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -480,7 +506,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         }
 
         if (agregar.condicion == evento.getSource()) {
-            if (agregar.curp.getText().length() >= 18) {
+            if (agregar.condicion.getText().length() >= 18) {
                 evento.consume();
             } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c != ' ') && (c != 'ñ') && (c != 'Ñ')) {
                 evento.consume();
@@ -609,7 +635,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 evento.consume();
             }
         }
-        
+
         if (editarEscuela.txt_clave == evento.getSource()) {
             if (editarEscuela.txt_clave.getText().length() >= 20) {
                 evento.consume();
@@ -617,7 +643,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 evento.consume();
             }
         }
-        
+
         if (editarEscuela.txt_nombre == evento.getSource()) {
             if (editarEscuela.txt_nombre.getText().length() >= 100) {
                 evento.consume();
@@ -625,7 +651,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 evento.consume();
             }
         }
-        
+
         if (editarEscuela.txt_turno == evento.getSource()) {
             if (editarEscuela.txt_turno.getText().length() >= 30) {
                 evento.consume();
@@ -633,28 +659,27 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 evento.consume();
             }
         }
-        
+
         if (editarEscuela.txt_zona == evento.getSource()) {
             if (c < '0' || c > '9') {
                 evento.consume();
             }
         }
-        
-        if (editarEscuela.txt_grado == evento.getSource()) {     
-             if (c < '0' || c > '9') {
+
+        if (editarEscuela.txt_grado == evento.getSource()) {
+            if (c < '0' || c > '9') {
                 evento.consume();
             }
         }
-        
-        if (editarEscuela.txt_grupo == evento.getSource()) {   
+
+        if (editarEscuela.txt_grupo == evento.getSource()) {
             if (editarEscuela.txt_grupo.getText().length() >= 1) {
                 evento.consume();
-            }
-            else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+            } else if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
                 evento.consume();
             }
         }
-        
+
         if (editarEscuela.txt_municipio == evento.getSource()) {
             if (editarEscuela.txt_municipio.getText().length() >= 50) {
                 evento.consume();
@@ -662,7 +687,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 evento.consume();
             }
         }
-        
+
         if (editarEscuela.txt_nombreDire == evento.getSource()) {
             if (editarEscuela.txt_nombreDire.getText().length() >= 60) {
                 evento.consume();
@@ -670,7 +695,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 evento.consume();
             }
         }
-        
+
         if (editarEscuela.txt_Ciclo == evento.getSource()) {
             if (editarEscuela.txt_Ciclo.getText().length() >= 11) {
                 evento.consume();
@@ -682,7 +707,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        
     }
 
     //Metodo para hacer que todas las letras sean mayusculas
@@ -759,43 +784,48 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         if (editar.requisitos_faltantes == evento.getSource()) {
             editar.requisitos_faltantes.setText(editar.requisitos_faltantes.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_Ciclo == evento.getSource()) {
             editarEscuela.txt_Ciclo.setText(editarEscuela.txt_Ciclo.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_clave == evento.getSource()) {
             editarEscuela.txt_clave.setText(editarEscuela.txt_clave.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_grado == evento.getSource()) {
             editarEscuela.txt_grado.setText(editarEscuela.txt_grado.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_grupo == evento.getSource()) {
             editarEscuela.txt_grupo.setText(editarEscuela.txt_grupo.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_municipio == evento.getSource()) {
             editarEscuela.txt_municipio.setText(editarEscuela.txt_municipio.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_nombre == evento.getSource()) {
             editarEscuela.txt_nombre.setText(editarEscuela.txt_nombre.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_nombreDire == evento.getSource()) {
             editarEscuela.txt_nombreDire.setText(editarEscuela.txt_nombreDire.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_turno == evento.getSource()) {
             editarEscuela.txt_turno.setText(editarEscuela.txt_turno.getText().toUpperCase());
         }
-        
+
         if (editarEscuela.txt_zona == evento.getSource()) {
             editarEscuela.txt_zona.setText(editarEscuela.txt_zona.getText().toUpperCase());
         }
 
+    }
+
+    //Metodo para validar flechas
+    private boolean esTeclaNavegacion(int keyCode) {
+        return keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN;
     }
 
     // Metodo para limpiar los campos la momento de cambiar entre paneles
@@ -825,16 +855,15 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         editar.fecha_baja.setDate(null);
         editar.estatus.setText("");
         editar.folio_boleta.setText("");
-        
+
         //Limpiar los labels de fua
-        fua.lbClave.setText("");
-        fua.lbGrado.setText("");
-        fua.lbGrupo.setText("");
-        fua.lbMunicipio.setText("");
-        fua.lbNombreDirector.setText("");
-        fua.lbTurno.setText("");
-        fua.lbZona.setText("");
-        
+//        fua.lbClave.setText("");
+//        fua.lbGrado.setText("");
+//        fua.lbGrupo.setText("");
+//        fua.lbMunicipio.setText("");
+//        fua.lbNombreDirector.setText("");
+//        fua.lbTurno.setText("");
+//        fua.lbZona.setText("");
         //Limpiar editar escuela
         editarEscuela.txt_Ciclo.setText("");
         editarEscuela.txt_clave.setText("");
@@ -849,59 +878,59 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
     @Override
     public void valueChanged(ListSelectionEvent evento) {
-    if (!evento.getValueIsAdjusting()) {
-        System.out.println("Primer if");
+        if (!evento.getValueIsAdjusting()) {
 
-        int selectedRowsAlumnos = this.fua.tbl_alumns.getSelectedRow();
-        int selectedRowsEscuelas = editarEscuela.Tabla_escuelas.getSelectedRow();
+            int selectedRowsAlumnos = this.fua.tbl_alumns.getSelectedRow();
+            int selectedRowsEscuelas = editarEscuela.Tabla_escuelas.getSelectedRow();
 
-        if (selectedRowsAlumnos != -1 && fua.tbl_alumns.getRowCount() > 0 && fua.tbl_alumns.getColumnCount() == 14) {
-            int selectedRow = selectedRowsAlumnos;
-            int clave = (int) fua.tbl_alumns.getValueAt(selectedRow, 0);
-            String curp = (String) fua.tbl_alumns.getValueAt(selectedRow, 1);
-            String nombre = (String) fua.tbl_alumns.getValueAt(selectedRow, 2);
-            String sexo = (String) fua.tbl_alumns.getValueAt(selectedRow, 3);
-            String fechNacimiento = (String) fua.tbl_alumns.getValueAt(selectedRow, 4);
-            String entNacimiento = (String) fua.tbl_alumns.getValueAt(selectedRow, 5);
-            String lengIndigena = (String) fua.tbl_alumns.getValueAt(selectedRow, 6);
-            String condicion = (String) fua.tbl_alumns.getValueAt(selectedRow, 7);
-            String reqFaltantes = (String) fua.tbl_alumns.getValueAt(selectedRow, 8);
-            String fechAlta = (String) fua.tbl_alumns.getValueAt(selectedRow, 9);
-            String fechBaja = (String) fua.tbl_alumns.getValueAt(selectedRow, 10);
-            String estatus = (String) fua.tbl_alumns.getValueAt(selectedRow, 11);
-            int folioBoleta = (int) fua.tbl_alumns.getValueAt(selectedRow, 12);
-            String claveEscuela = (String) fua.tbl_alumns.getValueAt(selectedRow, 13);
+            if (selectedRowsAlumnos != -1 && fua.tbl_alumns.getRowCount() > 0 && fua.tbl_alumns.getColumnCount() == 14) {
+                int selectedRow = selectedRowsAlumnos;
+                int clave = (int) fua.tbl_alumns.getValueAt(selectedRow, 0);
+                String curp = (String) fua.tbl_alumns.getValueAt(selectedRow, 1);
+                String nombre = (String) fua.tbl_alumns.getValueAt(selectedRow, 2);
+                String sexo = (String) fua.tbl_alumns.getValueAt(selectedRow, 3);
+                String fechNacimiento = (String) fua.tbl_alumns.getValueAt(selectedRow, 4);
+                String entNacimiento = (String) fua.tbl_alumns.getValueAt(selectedRow, 5);
+                String lengIndigena = (String) fua.tbl_alumns.getValueAt(selectedRow, 6);
+                String condicion = (String) fua.tbl_alumns.getValueAt(selectedRow, 7);
+                String reqFaltantes = (String) fua.tbl_alumns.getValueAt(selectedRow, 8);
+                String fechAlta = (String) fua.tbl_alumns.getValueAt(selectedRow, 9);
+                String fechBaja = (String) fua.tbl_alumns.getValueAt(selectedRow, 10);
+                String estatus = (String) fua.tbl_alumns.getValueAt(selectedRow, 11);
+                int folioBoleta = (int) fua.tbl_alumns.getValueAt(selectedRow, 12);
+                String claveEscuela = (String) fua.tbl_alumns.getValueAt(selectedRow, 13);
 
-            // Crea una instancia de Alumno con los valores obtenidos
-            //Esto para evitar pasar al panel de editar alumnos sin datos
-            alumnoSeleccionado = new Alumno(clave, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
-        } else if (selectedRowsEscuelas != -1 && editarEscuela.Tabla_escuelas.getRowCount() > 0 && editarEscuela.Tabla_escuelas.getColumnCount() == 9) {
-            int selectedRow = selectedRowsEscuelas;
-            String clave = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 0);
-            String nombre = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 1);
-            String turno = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 2);
-            int zona = Integer.parseInt(editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 3).toString());
-            int grado = Integer.parseInt(editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 4).toString());
-            String grupo = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 5);
-            String municipio = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 6);
-            String director = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 7);
-            String ciclo = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 8);
+                // Crea una instancia de Alumno con los valores obtenidos
+                //Esto para evitar pasar al panel de editar alumnos sin datos
+                alumnoSeleccionado = new Alumno(clave, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
+            } else if (selectedRowsEscuelas != -1 && editarEscuela.Tabla_escuelas.getRowCount() > 0 && editarEscuela.Tabla_escuelas.getColumnCount() == 9) {
+                int selectedRow = selectedRowsEscuelas;
+                String clave = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 0);
+                String nombre = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 1);
+                String turno = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 2);
+                int zona = Integer.parseInt(editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 3).toString());
+                int grado = Integer.parseInt(editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 4).toString());
+                String grupo = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 5);
+                String municipio = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 6);
+                String director = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 7);
+                String ciclo = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 8);
 
-            
-            //Colocar los datos donde corresponde
-            editarEscuela.txt_clave.setText(clave);
-            editarEscuela.txt_nombre.setText(nombre);
-            editarEscuela.txt_turno.setText(turno);
-            editarEscuela.txt_zona.setText(Integer.toString(zona));
-            editarEscuela.txt_grado.setText(Integer.toString(grado));
-            editarEscuela.txt_grupo.setText(grupo);
-            editarEscuela.txt_municipio.setText(municipio);
-            editarEscuela.txt_nombreDire.setText(director);
-            editarEscuela.txt_Ciclo.setText(ciclo);
+                //Crear una instancia de escuela para no perder algun dato antes de modiicarlo
+                escuelaSeleccionada = new Escuela(clave, nombre, turno, zona, grado, grupo, municipio, director, ciclo);
+
+                //Colocar los datos donde corresponde
+                editarEscuela.txt_clave.setText(clave);
+                editarEscuela.txt_nombre.setText(nombre);
+                editarEscuela.txt_turno.setText(turno);
+                editarEscuela.txt_zona.setText(Integer.toString(zona));
+                editarEscuela.txt_grado.setText(Integer.toString(grado));
+                editarEscuela.txt_grupo.setText(grupo);
+                editarEscuela.txt_municipio.setText(municipio);
+                editarEscuela.txt_nombreDire.setText(director);
+                editarEscuela.txt_Ciclo.setText(ciclo);
+            }
         }
     }
-}
-
 
     //Crear una subclase para poder completar los campos
     @NoArgsConstructor  // Genera un constructor sin argumentos
