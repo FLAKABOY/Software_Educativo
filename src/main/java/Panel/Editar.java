@@ -61,6 +61,8 @@ public class Editar extends javax.swing.JPanel {
         btn_atras = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
 
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         jPanel1.setPreferredSize(new java.awt.Dimension(1136, 1000));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -167,6 +169,7 @@ public class Editar extends javax.swing.JPanel {
         jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 960, 120, 40));
 
         btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras{.png"))); // NOI18N
+        btn_atras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N

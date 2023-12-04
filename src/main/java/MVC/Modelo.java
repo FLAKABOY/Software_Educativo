@@ -131,23 +131,23 @@ public class Modelo {
             JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     //Metodo para llenar un cb quitando el que ya esta colocado
-    public static void dataCb (String clave, JComboBox cb){
+    public static void dataCb(String clave, JComboBox cb) {
         //Limpiar el CB
         cb.removeAllItems();
-        
+
         /*Se declaran los recursos que utilizara el metodo para que al terminar
          el bloque try estos se cierren automaticamente (Pricipalmente la conexion)*/
         String sql = "SELECT clave_escuela FROM Datos_escuela";
-         try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql);  ResultSet resultado = ps.executeQuery();){
-              while (resultado.next()) {
+        try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql);  ResultSet resultado = ps.executeQuery();) {
+            while (resultado.next()) {
                 String escuela = resultado.getString("clave_escuela");
-                if(escuela != clave){
+                if (escuela != clave) {
                     cb.addItem(escuela);
                 }
             }
-         } catch (SQLException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -245,21 +245,6 @@ public class Modelo {
 
                     } while (rs2.next());
 
-                    // Imprimir encabezados de columnas
-                    System.out.println("Columnas:");
-                    for (int i = 0; i < modeloTabla.getColumnCount(); i++) {
-                        System.out.print(modeloTabla.getColumnName(i) + "\t");
-                    }
-                    System.out.println("\n-----------------------------------");
-
-                    // Imprimir datos de la tabla
-                    for (int i = 0; i < modeloTabla.getRowCount(); i++) {
-                        for (int j = 0; j < modeloTabla.getColumnCount(); j++) {
-                            System.out.print(modeloTabla.getValueAt(i, j) + "\t");
-                        }
-                        System.out.println();  // Nueva línea para la siguiente fila
-                    }
-
                     // Actualizar el modelo de la tabla existente esto para no afectar al listener del modelo
                     tabla.setModel(modeloTabla); // AGREGA ESTA LÍNEA
 
@@ -277,26 +262,26 @@ public class Modelo {
     }
 
     public static void updateAlumns(int claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
-            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela){
+            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela) {
         //Consulta SQL
         String sql = "UPDATE Datos_alumnos SET "
-        + "clave_alumnos=?, "
-        + "curp=?, "
-        + "nombre_alumno=?, "
-        + "sexo=?, "
-        + "fecha_nacimiento=?, "
-        + "entidad_nacimiento=?, "
-        + "lengua_indigena=?, "
-        + "condicion=?, "
-        + "requisitos_faltantes=?, "
-        + "fecha_alta=?, "
-        + "fecha_baja=?, "
-        + "estatus=?, "
-        + "folio_boleta=?, "
-        + "clave=? "
-        + "WHERE clave_alumnos=?";
-        
-        try (Connection con = conectar(); PreparedStatement ps = con.prepareStatement(sql)){
+                + "clave_alumnos=?, "
+                + "curp=?, "
+                + "nombre_alumno=?, "
+                + "sexo=?, "
+                + "fecha_nacimiento=?, "
+                + "entidad_nacimiento=?, "
+                + "lengua_indigena=?, "
+                + "condicion=?, "
+                + "requisitos_faltantes=?, "
+                + "fecha_alta=?, "
+                + "fecha_baja=?, "
+                + "estatus=?, "
+                + "folio_boleta=?, "
+                + "clave=? "
+                + "WHERE clave_alumnos=?";
+
+        try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql)) {
             //Establecer los valores de la consulta preparada (PreparedStatement)
             ps.setInt(1, claveAlumno);
             ps.setString(2, curp);
@@ -313,10 +298,10 @@ public class Modelo {
             ps.setInt(13, folio_boleta);
             ps.setString(14, clave_escuela);
             ps.setInt(15, claveAlumno);
-            
+
             // Ejecutar la consulta de inserción y obtener el número de filas afectadas
             int filasInsertadas = ps.executeUpdate();
-            
+
             // Verificar si se insertaron filas correctamente y mostrar un mensaje
             if (filasInsertadas > 0) {
                 JOptionPane.showMessageDialog(null, "USUARIO ACTUALIZADO");
@@ -324,10 +309,53 @@ public class Modelo {
                 JOptionPane.showMessageDialog(null, "ERROR AL ACTUALIZAR LOS DATOS");
             }
             //La conexion se cierra automaticamente debido al try-with-resources.
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error:" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public static JTable competeTableSchool(JTable table) {
+        String sql = "SELECT * FROM Datos_escuela";
+        DefaultTableModel modeloTabla = (DefaultTableModel) table.getModel();
+
+        try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql);) {
+            try ( ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    return null;
+                }
+
+                // Limpiar modeloTabla antes de agregar nuevas filas
+                modeloTabla.setRowCount(0);
+
+                do {
+                    Object[] fila = {
+                        rs.getString("clave_escuela"),
+                        rs.getString("nombre_escuela"),
+                        rs.getString("turno"),
+                        rs.getString("zona"),
+                        rs.getString("grado"),
+                        rs.getString("grupo"),
+                        rs.getString("municipio"),
+                        rs.getString("nombre_director"),
+                        rs.getString("ciclo_escolar")
+
+                    };
+                    // Agregar la fila al modelo de la tabla
+                    modeloTabla.addRow(fila);
+                } while (rs.next());
+                // Actualizar el modelo de la tabla existente esto para no afectar al listener del modelo
+                table.setModel(modeloTabla); // AGREGA ESTA LÍNEA
+
+                //Retornar la tabla con los datos insertados
+                return table;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        // En caso de que falle el método retornar null
+        return null;
     }
 }

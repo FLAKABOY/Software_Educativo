@@ -119,7 +119,7 @@ public class Fua extends javax.swing.JPanel {
         lbClave.setBackground(new java.awt.Color(255, 255, 255));
         lbClave.setForeground(new java.awt.Color(0, 0, 0));
         lbClave.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 70, 20));
+        add(lbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 90, 20));
 
         lbGrado.setBackground(new java.awt.Color(255, 255, 255));
         lbGrado.setForeground(new java.awt.Color(0, 0, 0));
@@ -188,7 +188,7 @@ public class Fua extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
 
         cb_school.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cb_school, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 160, -1));
+        add(cb_school, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 200, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));

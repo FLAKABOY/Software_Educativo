@@ -36,15 +36,19 @@ public class Editar_escuela extends javax.swing.JPanel {
         lbl_clave = new javax.swing.JLabel();
         lbl_nombreDire = new javax.swing.JLabel();
         lbl_zona = new javax.swing.JLabel();
+        lbl_Nombre = new javax.swing.JLabel();
+        lbl_nombreDire1 = new javax.swing.JLabel();
+        txt_clave = new javax.swing.JTextField();
         txt_zona = new javax.swing.JTextField();
         txt_grado = new javax.swing.JTextField();
         txt_grupo = new javax.swing.JTextField();
         txt_municipio = new javax.swing.JTextField();
         txt_nombreDire = new javax.swing.JTextField();
-        txt_escuela = new javax.swing.JTextField();
+        txt_turno = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
+        txt_Ciclo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btn_Aceptar = new javax.swing.JButton();
-        cb_clave = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_escuelas = new javax.swing.JTable();
         Fondo = new javax.swing.JLabel();
@@ -60,7 +64,8 @@ public class Editar_escuela extends javax.swing.JPanel {
 
         btn_atras.setBackground(new java.awt.Color(255, 255, 255));
         btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras{.png"))); // NOI18N
-        jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
+        btn_atras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
 
         lbl_turno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_turno.setForeground(new java.awt.Color(0, 0, 0));
@@ -85,7 +90,7 @@ public class Editar_escuela extends javax.swing.JPanel {
         lbl_clave.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_clave.setForeground(new java.awt.Color(0, 0, 0));
         lbl_clave.setText("Clave:");
-        jPanel1.add(lbl_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, -1, -1));
+        jPanel1.add(lbl_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
 
         lbl_nombreDire.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_nombreDire.setForeground(new java.awt.Color(0, 0, 0));
@@ -96,6 +101,17 @@ public class Editar_escuela extends javax.swing.JPanel {
         lbl_zona.setForeground(new java.awt.Color(0, 0, 0));
         lbl_zona.setText("Zona:");
         jPanel1.add(lbl_zona, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, -1));
+
+        lbl_Nombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbl_Nombre.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_Nombre.setText("Nombre");
+        jPanel1.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
+
+        lbl_nombreDire1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbl_nombreDire1.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_nombreDire1.setText("Ciclo:");
+        jPanel1.add(lbl_nombreDire1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 620, -1, -1));
+        jPanel1.add(txt_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 310, -1));
         jPanel1.add(txt_zona, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 310, -1));
         jPanel1.add(txt_grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 310, -1));
         jPanel1.add(txt_grupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, 310, -1));
@@ -107,7 +123,9 @@ public class Editar_escuela extends javax.swing.JPanel {
         });
         jPanel1.add(txt_municipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 310, -1));
         jPanel1.add(txt_nombreDire, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 560, 310, -1));
-        jPanel1.add(txt_escuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 310, -1));
+        jPanel1.add(txt_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 310, -1));
+        jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 310, -1));
+        jPanel1.add(txt_Ciclo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 620, 310, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sello__2_-removebg-preview.png"))); // NOI18N
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, -1, 70));
@@ -115,24 +133,23 @@ public class Editar_escuela extends javax.swing.JPanel {
         btn_Aceptar.setForeground(new java.awt.Color(51, 204, 0));
         btn_Aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
         btn_Aceptar.setText("Aceptar");
-        jPanel1.add(btn_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 640, -1, -1));
-
-        jPanel1.add(cb_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 180, -1));
+        btn_Aceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btn_Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 680, -1, 30));
 
         Tabla_escuelas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Tittle 12", "Title 13", "Title 14"
+                "CLAVE", "NOMBRE", "TURNO", "ZONA", "GRADO", "GRUPO", "MUNICIPIO", "DIRECTOR", "CICLO"
             }
         ));
         jScrollPane1.setViewportView(Tabla_escuelas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 740, 810, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 740, 1000, 250));
 
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo uni (1).png"))); // NOI18N
@@ -157,26 +174,30 @@ public class Editar_escuela extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
-    private javax.swing.JTable Tabla_escuelas;
+    public javax.swing.JTable Tabla_escuelas;
     public javax.swing.JButton btn_Aceptar;
-    private javax.swing.JButton btn_atras;
-    private javax.swing.JComboBox<String> cb_clave;
+    public javax.swing.JButton btn_atras;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_Nombre;
     private javax.swing.JLabel lbl_clave;
     private javax.swing.JLabel lbl_grado;
     private javax.swing.JLabel lbl_grupo;
     private javax.swing.JLabel lbl_municipio;
     private javax.swing.JLabel lbl_nombreDire;
+    private javax.swing.JLabel lbl_nombreDire1;
     private javax.swing.JLabel lbl_turno;
     private javax.swing.JLabel lbl_zona;
-    private javax.swing.JTextField txt_escuela;
-    private javax.swing.JTextField txt_grado;
-    private javax.swing.JTextField txt_grupo;
-    private javax.swing.JTextField txt_municipio;
-    private javax.swing.JTextField txt_nombreDire;
-    private javax.swing.JTextField txt_zona;
+    public javax.swing.JTextField txt_Ciclo;
+    public javax.swing.JTextField txt_clave;
+    public javax.swing.JTextField txt_grado;
+    public javax.swing.JTextField txt_grupo;
+    public javax.swing.JTextField txt_municipio;
+    public javax.swing.JTextField txt_nombre;
+    public javax.swing.JTextField txt_nombreDire;
+    public javax.swing.JTextField txt_turno;
+    public javax.swing.JTextField txt_zona;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,6 +59,8 @@ public class Agregar extends javax.swing.JPanel {
         clave_Escuela = new javax.swing.JComboBox<>();
         fondo = new javax.swing.JLabel();
 
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(1050, 1050));
         jPanel1.setMinimumSize(new java.awt.Dimension(1050, 1050));
@@ -149,11 +151,13 @@ public class Agregar extends javax.swing.JPanel {
         btn_aceptar.setForeground(new java.awt.Color(0, 255, 0));
         btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comprobado.png"))); // NOI18N
         btn_aceptar.setText("Aceptar");
+        btn_aceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 940, 120, 40));
 
         btn_atras.setBackground(new java.awt.Color(255, 255, 255));
         btn_atras.setForeground(new java.awt.Color(255, 255, 255));
         btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/atras{.png"))); // NOI18N
+        btn_atras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btn_atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, -1));
 
         fechaNacimiento.setDateFormatString("yyyy/MM/dd");
