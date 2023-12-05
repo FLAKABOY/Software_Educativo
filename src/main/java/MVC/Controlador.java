@@ -210,8 +210,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     //Comprobacion y llenado
                     String sexo = alumnoSeleccionado.sexo;
 
-                    editar.sexo.addItem(sexo.equals("Femenino") ? "Femenino" : "Masculino");
-                    editar.sexo.addItem(sexo.equals("Masculino") ? "Femenino" : "Masculino");
+                    editar.sexo.addItem(sexo.equals("FEMENINO") ? "FEMENINO" : "MASCULINO");
+                    editar.sexo.addItem(sexo.equals("MASCULINO") ? "FEMENINO" : "MASCULINO");
 
                     //Llenar el cb de escuela
                     editar.clave_Escuela.addItem(alumnoSeleccionado.claveEscuela);
