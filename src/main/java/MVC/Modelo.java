@@ -6,6 +6,7 @@
  */
 package MVC;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,7 +45,7 @@ public class Modelo {
         return connection;
     }
 
-    public static void altaAlumno(int claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
+    public static void altaAlumno(BigInteger claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
             String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela) {
 
         //Se prepara la sentencia SQL
@@ -57,7 +58,7 @@ public class Modelo {
                   PreparedStatement comando = con.prepareStatement(sql)) {
 
             // Establecer los valores de los parámetros en el PreparedStatement
-            comando.setInt(1, claveAlumno);
+            comando.setObject(1, claveAlumno);
             comando.setString(2, curp);
             comando.setString(3, nombre_alumno);
             comando.setString(4, sexo);
@@ -100,7 +101,7 @@ public class Modelo {
         String sql = "SELECT nombre_escuela FROM Datos_escuela";
         try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql);  ResultSet resultado = ps.executeQuery();) {
 
-            cb.addItem("");
+            //cb.addItem("");
             while (resultado.next()) {
                 String escuela = resultado.getString("nombre_escuela");
                 cb.addItem(escuela);
@@ -223,7 +224,7 @@ public class Modelo {
                         // Puedes acceder a las columnas utilizando métodos como rs2.getString("nombreColumna")
                         // Crear un array de objetos para almacenar los datos de la fila
                         Object[] fila = {
-                            rs2.getInt("clave_alumnos"),
+                            new BigInteger(rs2.getString("clave_alumnos")),
                             rs2.getString("curp"),
                             rs2.getString("nombre_alumno"),
                             rs2.getString("sexo"),
@@ -260,8 +261,8 @@ public class Modelo {
         return null;
     }
 
-    public static void updateAlumns(int claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
-            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela, int claveVieja) {
+    public static void updateAlumns(BigInteger claveAlumno, String curp, String nombre_alumno, String sexo, String fecha_nacimiento, String entidad_nacimiento, String lengua_indigena,
+            String condicion, String requisitos_faltantes, String fecha_alta, String fecha_baja, String estatus, int folio_boleta, String clave_escuela, BigInteger claveVieja) {
         //Consulta SQL
         String sql = "UPDATE Datos_alumnos SET "
                 + "clave_alumnos=?, "
@@ -282,7 +283,7 @@ public class Modelo {
 
         try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql)) {
             //Establecer los valores de la consulta preparada (PreparedStatement)
-            ps.setInt(1, claveAlumno);
+            ps.setObject(1, claveAlumno);
             ps.setString(2, curp);
             ps.setString(3, nombre_alumno);
             ps.setString(4, sexo);
@@ -296,7 +297,7 @@ public class Modelo {
             ps.setString(12, estatus);
             ps.setInt(13, folio_boleta);
             ps.setString(14, clave_escuela);
-            ps.setInt(15, claveVieja);
+            ps.setObject(15, claveVieja);
 
             // Ejecutar la consulta de inserción y obtener el número de filas afectadas
             int filasInsertadas = ps.executeUpdate();
@@ -401,11 +402,11 @@ public class Modelo {
         }
     }
 
-    public static void deleteAlumn(int clave) {
+    public static void deleteAlumn(BigInteger clave) {
         String sql = "DELETE FROM Datos_alumnos WHERE clave_alumnos = ?";
 
         try ( Connection con = conectar();  PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, clave);
+            ps.setObject(1, clave);
 
             // Ejecutar la consulta de eliminación
             int rowsAffected = ps.executeUpdate();

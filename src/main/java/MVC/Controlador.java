@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -153,6 +154,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             //Programar las acciones del controlador para mostrar en la tabla
             try {
                 //Mostrar el panel de editar escuela
+                limpiarCampos();
                 vista.bg = vista(editarEscuela);
                 //Llamar al metodo para llenar la tabla con las escuelas
                 modelo.competeTableSchool(editarEscuela.Tabla_escuelas);
@@ -163,6 +165,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (fua.btn_agregar == evento.getSource()) {
             //Programar la muestra del panel de agregar para un alumno
             try {
+                limpiarCampos();
                 vista.bg = vista(agregar);
                 Modelo.completeCbCalve(agregar.clave_Escuela);
 
@@ -173,6 +176,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (fua.btn_editar == evento.getSource()) {
             //Programar la muestra del panel de editar los datos
             try {
+                limpiarCampos();
                 //Comprobar que se selecciono algun alumno
                 if (alumnoSeleccionado != null) {
                     // Obtener la fecha de nacimiento como cadena formateada
@@ -191,7 +195,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     java.util.Date fechaBaj = fechaBajaString.parse(fecBajaString);
 
                     //Llenar los campos antes de mostrar
-                    editar.clave_alumno.setText(Integer.toString(alumnoSeleccionado.clave));
+                    editar.clave_alumno.setText(alumnoSeleccionado.getClave().toString());
                     editar.condicion.setText(alumnoSeleccionado.condicion);
                     editar.curp.setText(alumnoSeleccionado.curp);
                     editar.entidad_nacimiento.setText(alumnoSeleccionado.entNacimiento);
@@ -244,8 +248,13 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 //Mensaje de advertencia en caso de error
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
-        } else if (fua.cb_school == evento.getSource()) {
+        } else if (fua.cb_school == evento.getSource() && evento != null) {
             //Programar la logica para eliminar logicamente un alumno 
+            System.out.println("Event received: " + evento);
+            System.out.println("Item count: " + fua.cb_school.getItemCount());
+            for (int i = 0; i < fua.cb_school.getItemCount(); i++) {
+                System.out.println("Item " + i + ": " + fua.cb_school.getItemAt(i));
+            }
             try {
                 //Programar las acciones para llenar dependiendo de la opcion seleccionada
                 //Se manda a llamar el metodo para obtener los datos de la escual y guardarlos en un objeto
@@ -259,12 +268,12 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 fua.lbMunicipio.setText(es.municipio);
                 fua.lbNombreDirector.setText(es.nombre_director);
                 //Llenar la tabla
-                fua.tbl_alumns = Modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
+                fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
 
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
                 e.printStackTrace(); // Imprime la traza de la excepción en la consola
-                JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -281,6 +290,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                     //En caso de que los campos numericos esten vacios
                     if (!agregar.folio_boleta.getText().isEmpty()) {
+                        BigInteger claveAlumno = new BigInteger(agregar.clave_alumno.getText());
+
                         // Obtener la fecha de nacimiento como cadena formateada
                         String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaNacimiento.getDate());
 
@@ -289,7 +300,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                         // Llamar al método para agregar
                         Modelo.altaAlumno(
-                                Integer.parseInt(agregar.clave_alumno.getText()),
+                                claveAlumno,
                                 agregar.curp.getText(),
                                 agregar.nombre_alumno.getText(),
                                 agregar.sexo.getSelectedItem().toString(),
@@ -305,6 +316,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                                 agregar.clave_Escuela.getSelectedItem().toString()
                         );
                     } else {
+
+                        BigInteger claveAlumno = new BigInteger(agregar.clave_alumno.getText());
                         // Obtener la fecha de nacimiento como cadena formateada
                         String fechaNacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(agregar.fechaNacimiento.getDate());
 
@@ -313,7 +326,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                         // Llamar al método para agregar
                         Modelo.altaAlumno(
-                                Integer.parseInt(agregar.clave_alumno.getText()),
+                                claveAlumno,
                                 agregar.curp.getText(),
                                 agregar.nombre_alumno.getText(),
                                 agregar.sexo.getSelectedItem().toString(),
@@ -348,7 +361,6 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (agregar.btn_atras == evento.getSource()) {
             //Programar la muestra del panel principal
             try {
-                limpiarCampos();
                 fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
@@ -383,8 +395,10 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                     if (fechaBajaString != "0000-00-00") {
                         //Mandar a llamar el metodo para actualizar los datos
+                        String textoClaveAlumno = editar.clave_alumno.getText();
+                        BigInteger claveAlumno = new BigInteger(textoClaveAlumno);
                         modelo.updateAlumns(
-                                Integer.parseInt(editar.clave_alumno.getText()),
+                                claveAlumno,
                                 editar.curp.getText(),
                                 editar.nombre_alumno.getText(),
                                 editar.sexo.getSelectedItem().toString(),
@@ -401,9 +415,10 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                                 alumnoSeleccionado.clave
                         );
                     } else {
-                        System.out.println("Fecha:" + fechaBajaString + "Folio:" + editar.folio_boleta.getText());
+                        String textoClaveAlumno = editar.clave_alumno.getText();
+                        BigInteger claveAlumno = new BigInteger(textoClaveAlumno);
                         modelo.updateAlumns(
-                                Integer.parseInt(editar.clave_alumno.getText()),
+                                claveAlumno,
                                 editar.curp.getText(),
                                 editar.nombre_alumno.getText(),
                                 editar.sexo.getSelectedItem().toString(),
@@ -422,7 +437,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     }
                     //Limpiar los campos
                     limpiarCampos();
-                    //Actualizar los datos de la tabla
+                    //Actualizar los datos de la tabla                  
                     fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                     //Regrear al panel principal
                     vista.bg = vista(fua);
@@ -437,9 +452,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (editar.btn_atras == evento.getSource()) {
             //Regresal al panel principal
             try {
-                limpiarCampos();
                 alumnoSeleccionado = null;
-                fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -471,6 +484,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                     limpiarCampos();
                     //Regresar al panel principal
+                    modelo.completeCbFua(fua.cb_school);
                     vista.bg = vista(fua);
                 } else {
                     JOptionPane.showMessageDialog(null, "Favor de llenar los campos correspondientes.", "CAMPOS FALTANTES", JOptionPane.WARNING_MESSAGE);
@@ -482,9 +496,9 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (editarEscuela.btn_atras == evento.getSource()) {
             //Programar la muestra del panel principal
             try {
-                limpiarCampos();
+                modelo.completeCbFua(fua.cb_school);
                 escuelaSeleccionada = null;
-                modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
+                limpiarCampos();
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -707,7 +721,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
+
     }
 
     //Metodo para hacer que todas las letras sean mayusculas
@@ -823,11 +837,6 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
     }
 
-    //Metodo para validar flechas
-    private boolean esTeclaNavegacion(int keyCode) {
-        return keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN;
-    }
-
     // Metodo para limpiar los campos la momento de cambiar entre paneles
     public void limpiarCampos() {
         agregar.clave_alumno.setText("");
@@ -885,7 +894,11 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
             if (selectedRowsAlumnos != -1 && fua.tbl_alumns.getRowCount() > 0 && fua.tbl_alumns.getColumnCount() == 14) {
                 int selectedRow = selectedRowsAlumnos;
-                int clave = (int) fua.tbl_alumns.getValueAt(selectedRow, 0);
+                // Obtén el valor entero de la tabla en la posición seleccionada y columna 0
+                int claveInt = (int) fua.tbl_alumns.getValueAt(selectedRow, 0);
+
+                // Convierte el valor entero a un objeto BigInteger
+                BigInteger claveBigInteger = BigInteger.valueOf(claveInt);
                 String curp = (String) fua.tbl_alumns.getValueAt(selectedRow, 1);
                 String nombre = (String) fua.tbl_alumns.getValueAt(selectedRow, 2);
                 String sexo = (String) fua.tbl_alumns.getValueAt(selectedRow, 3);
@@ -902,7 +915,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                 // Crea una instancia de Alumno con los valores obtenidos
                 //Esto para evitar pasar al panel de editar alumnos sin datos
-                alumnoSeleccionado = new Alumno(clave, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
+                alumnoSeleccionado = new Alumno(claveBigInteger, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
             } else if (selectedRowsEscuelas != -1 && editarEscuela.Tabla_escuelas.getRowCount() > 0 && editarEscuela.Tabla_escuelas.getColumnCount() == 9) {
                 int selectedRow = selectedRowsEscuelas;
                 String clave = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 0);
@@ -995,7 +1008,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         //Atributos
         @Getter
         @Setter
-        private int clave;
+        private BigInteger clave;
         @Getter
         @Setter
         private String curp;

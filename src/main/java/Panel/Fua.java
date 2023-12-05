@@ -140,7 +140,7 @@ public class Fua extends javax.swing.JPanel {
         lbNombreDirector.setBackground(new java.awt.Color(255, 255, 255));
         lbNombreDirector.setForeground(new java.awt.Color(0, 0, 0));
         lbNombreDirector.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbNombreDirector, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 240, 20));
+        add(lbNombreDirector, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 350, 20));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -150,7 +150,7 @@ public class Fua extends javax.swing.JPanel {
         lbTurno.setBackground(new java.awt.Color(255, 255, 255));
         lbTurno.setForeground(new java.awt.Color(0, 0, 0));
         lbTurno.setBorder(new javax.swing.border.MatteBorder(null));
-        add(lbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 90, 20));
+        add(lbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 90, 20));
 
         lbGrupo.setBackground(new java.awt.Color(255, 255, 255));
         lbGrupo.setForeground(new java.awt.Color(0, 0, 0));
@@ -188,7 +188,7 @@ public class Fua extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
 
         cb_school.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cb_school, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 200, -1));
+        add(cb_school, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 260, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
