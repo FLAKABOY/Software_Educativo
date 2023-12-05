@@ -17,19 +17,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigInteger;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.input.KeyCode;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -895,10 +891,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             if (selectedRowsAlumnos != -1 && fua.tbl_alumns.getRowCount() > 0 && fua.tbl_alumns.getColumnCount() == 14) {
                 int selectedRow = selectedRowsAlumnos;
                 // Obtén el valor entero de la tabla en la posición seleccionada y columna 0
-                int claveInt = (int) fua.tbl_alumns.getValueAt(selectedRow, 0);
-
                 // Convierte el valor entero a un objeto BigInteger
-                BigInteger claveBigInteger = BigInteger.valueOf(claveInt);
+                BigInteger claveBigInt = new BigInteger(String.valueOf(fua.tbl_alumns.getValueAt(selectedRow, 0)));
                 String curp = (String) fua.tbl_alumns.getValueAt(selectedRow, 1);
                 String nombre = (String) fua.tbl_alumns.getValueAt(selectedRow, 2);
                 String sexo = (String) fua.tbl_alumns.getValueAt(selectedRow, 3);
@@ -915,7 +909,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                 // Crea una instancia de Alumno con los valores obtenidos
                 //Esto para evitar pasar al panel de editar alumnos sin datos
-                alumnoSeleccionado = new Alumno(claveBigInteger, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
+                alumnoSeleccionado = new Alumno(claveBigInt, curp, nombre, sexo, fechNacimiento, entNacimiento, lengIndigena, condicion, reqFaltantes, fechAlta, fechBaja, estatus, folioBoleta, claveEscuela);
             } else if (selectedRowsEscuelas != -1 && editarEscuela.Tabla_escuelas.getRowCount() > 0 && editarEscuela.Tabla_escuelas.getColumnCount() == 9) {
                 int selectedRow = selectedRowsEscuelas;
                 String clave = (String) editarEscuela.Tabla_escuelas.getValueAt(selectedRow, 0);
