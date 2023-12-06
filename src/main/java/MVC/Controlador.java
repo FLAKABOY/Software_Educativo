@@ -12,6 +12,7 @@ package MVC;
 
 import Panel.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -24,6 +25,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import lombok.AllArgsConstructor;
@@ -48,6 +51,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
     private Editar editar;
     //Panel de editar escuela
     private Editar_escuela editarEscuela;
+    //Panel de cargando
+    private Cargando loading;
     //Alumno seleccionado
     Alumno alumnoSeleccionado;
     //Escuela seleccionada
@@ -57,6 +62,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         vista.setVisible(true);
         this.modelo = modelo;
         this.vista = vista;
+        this.loading = new Cargando();
+        vista.bg = vista(loading);
 
         //Instanciar el panel principal
         this.fua = new Fua();
@@ -65,8 +72,9 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         this.fua.btn_agregar.addActionListener(this);
         this.fua.btn_eliminar.addActionListener(this);
         this.fua.btn_editar.addActionListener(this);
-        vista.bg = vista(fua);
+        //vista.bg = vista(fua);
         this.modelo.completeCbFua(fua.cb_school);
+        vista.bg = vista(fua);
         //Se coloca el listener despues de llenar el CB para no generar NullPointerException
         this.fua.cb_school.addActionListener(this);
         // Configurar el ListSelectionListener después de llenar la tabla
@@ -91,6 +99,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         this.editarEscuela.btn_Aceptar.addActionListener(this);
         this.editarEscuela.btn_atras.addActionListener(this);
         this.editarEscuela.Tabla_escuelas.getSelectionModel().addListSelectionListener(this);
+        
 
         //Agregar un listener a los Jtext de agregar
         this.agregar.clave_alumno.addKeyListener(this);
@@ -149,9 +158,9 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         if (fua.Editar_escuela == evento.getSource()) {
             //Programar las acciones del controlador para mostrar en la tabla
             try {
+                mostrarPanelDurante(editarEscuela, 2000);
                 //Mostrar el panel de editar escuela
                 limpiarCampos();
-                vista.bg = vista(editarEscuela);
                 //Llamar al metodo para llenar la tabla con las escuelas
                 modelo.competeTableSchool(editarEscuela.Tabla_escuelas);
             } catch (RuntimeException e) {
@@ -162,7 +171,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
             //Programar la muestra del panel de agregar para un alumno
             try {
                 limpiarCampos();
-                vista.bg = vista(agregar);
+                mostrarPanelDurante(agregar, 2000);
                 Modelo.completeCbCalve(agregar.clave_Escuela);
 
             } catch (RuntimeException e) {
@@ -175,6 +184,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                 limpiarCampos();
                 //Comprobar que se selecciono algun alumno
                 if (alumnoSeleccionado != null) {
+                    mostrarPanelDurante(editar, 2000);
                     // Obtener la fecha de nacimiento como cadena formateada
                     String fechaNacimientoString = alumnoSeleccionado.fechNacimiento;
                     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -216,9 +226,7 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     //Llenar el cb de escuela
                     editar.clave_Escuela.addItem(alumnoSeleccionado.claveEscuela);
                     modelo.dataCb(alumnoSeleccionado.claveEscuela, editar.clave_Escuela);
-
-                    //Mostrar el panel de editar
-                    vista.bg = vista(editar);
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Favor de seleccionar un alumno de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -341,7 +349,8 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                     // Método para limpiar los campos
                     limpiarCampos();
-
+                    //Actualizar la tabla si se agrego un alumno
+                    fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                 } else {
                     JOptionPane.showMessageDialog(null, "Favor de llenar los campos necesarios", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -357,7 +366,6 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (agregar.btn_atras == evento.getSource()) {
             //Programar la muestra del panel principal
             try {
-                fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
                 vista.bg = vista(fua);
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
@@ -433,10 +441,10 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
                     }
                     //Limpiar los campos
                     limpiarCampos();
-                    //Actualizar los datos de la tabla                  
+                    //Regresar al panel principal con pantallad e carga
+                    mostrarPanelDurante(fua, 2000);
+                    //Actualizar los datos de la tabla   
                     fua.tbl_alumns = modelo.completeTable(fua.tbl_alumns, fua.cb_school.getSelectedItem().toString());
-                    //Regrear al panel principal
-                    vista.bg = vista(fua);
                 } else {
                     JOptionPane.showMessageDialog(null, "Favor de llenar los campos correspondientes.", "CAMPOS FALTANTES", JOptionPane.WARNING_MESSAGE);
                 }
@@ -448,8 +456,9 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (editar.btn_atras == evento.getSource()) {
             //Regresal al panel principal
             try {
-                alumnoSeleccionado = null;
+                fua.tbl_alumns.clearSelection();
                 vista.bg = vista(fua);
+                alumnoSeleccionado = null;
             } catch (RuntimeException e) {
                 //Mensaje de advertencia en caso de error
                 JOptionPane.showMessageDialog(null, "Error general favor de llamar al especialista", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -480,8 +489,9 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
 
                     limpiarCampos();
                     //Regresar al panel principal
+                    mostrarPanelDurante(fua, 2000);
                     modelo.completeCbFua(fua.cb_school);
-                    vista.bg = vista(fua);
+                    //vista.bg = vista(fua);
                 } else {
                     JOptionPane.showMessageDialog(null, "Favor de llenar los campos correspondientes.", "CAMPOS FALTANTES", JOptionPane.WARNING_MESSAGE);
                 }
@@ -492,7 +502,6 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         } else if (editarEscuela.btn_atras == evento.getSource()) {
             //Programar la muestra del panel principal
             try {
-                modelo.completeCbFua(fua.cb_school);
                 escuelaSeleccionada = null;
                 limpiarCampos();
                 vista.bg = vista(fua);
@@ -881,6 +890,21 @@ public class Controlador implements ActionListener, KeyListener, ListSelectionLi
         editarEscuela.txt_zona.setText("");
     }
 
+    public void mostrarPanelDurante(JPanel panel, int duracionMilisegundos) {
+        // Mostrar "loading" inicialmente
+        vista.bg = vista(loading);
+
+        // Configurar un temporizador para cambiar la interfaz después de un cierto retraso
+        Timer timer = new Timer(duracionMilisegundos, (ActionEvent e) -> {
+            // Esta parte se ejecutará después del tiempo especificado
+            vista.bg = vista(panel);
+        });
+
+        // Iniciar el temporizador
+        timer.setRepeats(false); // Configurar para que se ejecute solo una vez
+        timer.start();
+    }
+    
     @Override
     public void valueChanged(ListSelectionEvent evento) {
         if (!evento.getValueIsAdjusting()) {
