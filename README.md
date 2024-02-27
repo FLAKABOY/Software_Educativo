@@ -1,4 +1,4 @@
-Software Educativo para la Zona Escolar 054 de Mazatlán, Sinaloa
+Software Educativo para la Zona Escolar 054 de Mazatlán, Sinaloa.
 Este proyecto es un software educativo desarrollado específicamente para la Zona Escolar 054 de Mazatlán, Sinaloa. Está diseñado siguiendo el patrón de diseño Modelo-Vista-Controlador (MVC) para una organización clara y mantenible del código.
 
 Una de las prioridades en el desarrollo de este software ha sido garantizar un rendimiento óptimo y una conexión segura y eficiente con la base de datos. Se han implementado medidas para evitar la saturación del tráfico en escenarios de alta demanda, asegurando así una experiencia fluida para los usuarios.
